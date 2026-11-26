@@ -1,0 +1,30 @@
+---
+# HOW TO ADD A POST ON THE GITHUB WEBSITE
+# 1. Open this file on GitHub and copy everything.
+# 2. Go to the "posts" folder → "Add file" → "Create new file".
+# 3. Name it:  your-post-name/index.qmd   (lowercase, hyphens, no spaces)
+# 4. Paste, edit the lines below, write your post, click "Commit changes".
+# 5. Wait ~2 minutes: the site rebuilds itself and the post goes live.
+#
+# Lines starting with # are notes — you can delete them.
+# This folder starts with "_" so it is never published.
+
+title: "Your post title"
+author: "Abdelaziz Awad"
+date: "2026-12-01"          # YYYY-MM-DD
+categories: [Clinical Research]   # any of: Clinical Research, Data Science, AI, Bioinformatics
+description: "One sentence that appears in the post list."
+# image: cover.jpg          # optional: upload cover.jpg into the same folder, then remove the #
+# draft: true               # optional: keeps the post hidden until you delete this line
+---
+
+Write your post here.
+
+## A heading
+
+Normal text. **Bold**, *italic*, and a [link](https://example.org).
+
+- A bullet point
+- Another one
+
+![Optional image caption](photo.jpg)
