@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/meta-analysis-in-r/index.html",
       "/posts/welcome/index.html"
     ]
   }

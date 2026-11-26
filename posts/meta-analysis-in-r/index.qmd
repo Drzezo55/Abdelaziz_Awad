@@ -1,0 +1,266 @@
+---
+title: "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA"
+author: "Abdelaziz Awad"
+date: "2026-11-26"
+categories: [Clinical Research, Data Science]
+description: "A hands-on tutorial you can run in your browser: random-effects meta-analysis, subgroup analysis, meta-regression, publication bias and trial sequential analysis with metafor and RTSA."
+image: forest.png
+filters:
+  - webr
+webr:
+  packages: ["metafor", "RTSA", "CompQuadForm"]
+  show-startup-message: true
+toc: true
+---
+
+This tutorial walks through a complete meta-analysis in R, from pooling the studies to
+checking whether the evidence is actually conclusive. **Every code box is live**: press
+**Run Code** to execute it in your browser, then edit the code and run it again. Nothing
+needs to be installed.
+
+::: {.callout-note}
+## First run takes a few seconds
+The page downloads R and the packages (`metafor`, `RTSA`) the first time. Wait until the
+status bar at the top of the page says it's ready, then run the boxes **in order**:
+each box uses objects created by the ones above it.
+:::
+
+## The example data
+
+We use a classic dataset that ships with `metafor`: 13 trials of the **BCG vaccine** for
+preventing tuberculosis (`dat.bcg`). For each trial we have the number of TB cases and
+non-cases in the vaccinated (`tpos`, `tneg`) and control (`cpos`, `cneg`) groups, plus two
+study characteristics we'll use later: how participants were allocated (`alloc`) and the
+absolute latitude of the study site (`ablat`).
+
+```{webr-r}
+library(metafor)
+head(dat.bcg)
+```
+
+## 1. Calculate effect sizes
+
+`escalc()` computes an effect size and its sampling variance for each study. We use the
+**log risk ratio** (`measure = "RR"`). Meta-analysis of ratios is done on the log scale and
+converted back at the end.
+
+```{webr-r}
+dat <- escalc(measure = "RR",
+              ai = tpos, bi = tneg,   # vaccinated: cases, non-cases
+              ci = cpos, di = cneg,   # control:    cases, non-cases
+              data = dat.bcg,
+              slab = paste(author, year))
+dat[, c("author", "year", "yi", "vi")]
+```
+
+`yi` is the log risk ratio and `vi` its variance. A negative `yi` means fewer TB cases
+in the vaccinated group.
+
+## 2. Random-effects meta-analysis
+
+Trials differ in populations and settings, so we assume the true effect varies between
+studies and fit a **random-effects model** (REML estimator, the `metafor` default).
+
+```{webr-r}
+res <- rma(yi, vi, data = dat, method = "REML")
+res
+```
+
+Convert the pooled estimate back to a risk ratio, with its 95% CI and prediction interval:
+
+```{webr-r}
+predict(res, transf = exp, digits = 2)
+```
+
+**How to read it:**
+
+- **Pooled RR ≈ 0.49 (95% CI 0.34 to 0.70):** on average, vaccination roughly halves the risk of TB.
+- **I² ≈ 92% and Q-test p < 0.0001:** heterogeneity is very high. The trials disagree a lot
+  more than chance would explain.
+- **95% prediction interval ≈ 0.15 to 1.55:** a *new* trial could find anything from a large
+  benefit to no benefit. With this much heterogeneity, the prediction interval matters as much
+  as the pooled estimate.
+
+### Forest plot
+
+```{webr-r}
+forest(res, atransf = exp,
+       header = c("Study", "RR [95% CI]"),
+       xlab = "Risk ratio (log scale)")
+```
+
+## 3. Subgroup analysis
+
+Does the effect differ by **allocation method** (random, alternate, systematic)? First,
+pool the studies within each subgroup separately:
+
+```{webr-r}
+for (g in c("random", "alternate", "systematic")) {
+  r <- rma(yi, vi, data = dat, subset = alloc == g)
+  cat(sprintf("%-11s k = %2d   RR = %.2f [%.2f, %.2f]   I2 = %.0f%%\n",
+              g, r$k, exp(r$b), exp(r$ci.lb), exp(r$ci.ub), r$I2))
+}
+```
+
+Then test whether the subgroups **differ from each other**. Adding `alloc` as a moderator
+gives the test for subgroup differences (the `QM` statistic):
+
+```{webr-r}
+sub <- rma(yi, vi, mods = ~ alloc, data = dat)
+sub
+```
+
+The test of moderators gives **QM ≈ 1.77, df = 2, p ≈ 0.41**: no evidence that the effect
+differs by allocation method. The subgroup estimates look different, but the differences
+are compatible with chance.
+
+::: {.callout-tip}
+## Good practice for subgroups
+Pre-specify subgroups in your protocol, keep them few, and judge them by the **test for
+subgroup differences**, not by whether one subgroup is "significant" and another isn't.
+:::
+
+### Meta-regression: a continuous moderator
+
+Subgroups split studies into categories. For a continuous characteristic such as
+**latitude**, use meta-regression:
+
+```{webr-r}
+mr <- rma(yi, vi, mods = ~ ablat, data = dat)
+mr
+regplot(mr, transf = exp, xlab = "Absolute latitude (degrees)", ylab = "Risk ratio")
+```
+
+Latitude is strongly associated with the effect (**p < 0.0001**) and explains about
+**76% of the heterogeneity** (R²). The vaccine works better further from the equator.
+
+## 4. Publication bias
+
+Small studies with "negative" results are less likely to be published, which can make the
+pooled effect look too good. Start with a **funnel plot**: without bias, the studies
+should scatter symmetrically around the pooled estimate.
+
+```{webr-r}
+funnel(res, xlab = "Log risk ratio")
+```
+
+Then use formal tests:
+
+```{webr-r}
+regtest(res)    # Egger's regression test
+ranktest(res)   # Begg's rank correlation test
+```
+
+Neither test suggests asymmetry (Egger p ≈ 0.42, Begg p ≈ 0.95).
+
+**Trim-and-fill** estimates how many studies might be "missing" and adds them to see
+how the result would change:
+
+```{webr-r}
+tf <- trimfill(res)
+tf
+funnel(tf, xlab = "Log risk ratio")   # filled studies are shown as open circles
+predict(tf, transf = exp, digits = 2)
+```
+
+One study is imputed, and the adjusted RR (≈ 0.52) barely moves, so the conclusion holds.
+
+::: {.callout-warning}
+## Interpret with care
+These tests have low power with fewer than about 10 studies, and funnel asymmetry can
+come from heterogeneity, not just publication bias. Here, heterogeneity is very high, so
+treat all of these results as rough checks.
+:::
+
+## 5. Trial sequential analysis (TSA)
+
+A conventional meta-analysis can look "significant" just because it was tested repeatedly
+as trials accumulated, or because there isn't yet enough information. **TSA** treats the
+meta-analysis like a sequential trial. It calculates the **required information size**
+(the number of participants needed for a reliable answer) and draws **monitoring
+boundaries** that the cumulative Z-curve must cross before you can call the result firm.
+
+We use the [`RTSA`](https://cran.r-project.org/package=RTSA) package. It needs the event
+counts and group sizes, with trials in chronological order:
+
+```{webr-r}
+library(RTSA)
+
+bcg <- dat.bcg[order(dat.bcg$year), ]
+tsa_dat <- data.frame(
+  study = paste(bcg$author, bcg$year),
+  eI = as.numeric(bcg$tpos), nI = as.numeric(bcg$tpos + bcg$tneg),  # vaccinated
+  eC = as.numeric(bcg$cpos), nC = as.numeric(bcg$cpos + bcg$cneg))  # control
+tsa_dat
+```
+
+Now run the TSA. We assume a minimal clinically relevant effect of **RR = 0.8**
+(a 20% relative risk reduction), α = 5% (two-sided) and 80% power, with O'Brien-Fleming
+alpha-spending boundaries:
+
+```{webr-r}
+tsa <- RTSA(type = "analysis", data = tsa_dat, outcome = "RR",
+            mc = 0.8,              # minimal clinically relevant RR
+            side = 2, alpha = 0.05, beta = 0.2,
+            es_alpha = "esOF",     # O'Brien-Fleming alpha spending
+            fixed = FALSE)         # random-effects
+tsa
+```
+
+```{webr-r}
+suppressWarnings(print(plot(tsa)))   # hides harmless ggplot2 warnings
+```
+
+**How to read it:**
+
+- The conventional random-effects result is "significant" (naive **p ≈ 0.002**).
+- But with this much heterogeneity and a low event rate, the **required information size
+  is huge**: about 3.5 million participants. The trials provide only about **10%** of it.
+- The **TSA-adjusted 95% CI (≈ 0.01 to 18)** is extremely wide, and the Z-curve hasn't crossed
+  the monitoring boundary.
+
+So, by TSA standards, this body of evidence is **not yet conclusive**, even though the
+ordinary meta-analysis looks clear. This is exactly the situation TSA is designed to
+flag: an apparently significant result that rests on too little information once
+heterogeneity is accounted for.
+
+::: {.callout-tip}
+## Try it yourself
+Change `mc = 0.8` to `mc = 0.5` (you're now only interested in halving the risk) and run
+the box again. How does the required information size change?
+:::
+
+::: {.callout-note}
+## Limitation of this example
+TSA is meant to be planned prospectively. Running it after the fact, as here, is a
+sensitivity analysis, and `RTSA` warns about this in its output.
+:::
+
+## Summary
+
+| Step | Function | Result for the BCG trials |
+|---|---|---|
+| Effect sizes | `escalc()` | Log risk ratios for 13 trials |
+| Pooled effect | `rma()` | RR 0.49 (0.34 to 0.70), I² ≈ 92% |
+| Subgroups | `rma(mods = ~ alloc)` | No difference by allocation (p ≈ 0.41) |
+| Meta-regression | `rma(mods = ~ ablat)` | Latitude explains ≈ 76% of heterogeneity |
+| Publication bias | `funnel()`, `regtest()`, `ranktest()`, `trimfill()` | No clear asymmetry; adjusted RR ≈ 0.52 |
+| TSA | `RTSA()` | Only ≈ 10% of required information; not conclusive |
+
+## Run it on your own computer
+
+Everything above also works in regular R or RStudio. Install the packages once:
+
+```r
+install.packages(c("metafor", "RTSA"))
+```
+
+Then copy the code from each box, in order.
+
+**Further reading**
+
+- Viechtbauer W. Conducting meta-analyses in R with the metafor package. *Journal of
+  Statistical Software*. 2010;36(3):1–48.
+- [Doing Meta-Analysis in R](https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/), a free online book
+- [Cochrane Handbook, chapter 10: Analysing data and undertaking meta-analyses](https://training.cochrane.org/handbook)
+- [RTSA package documentation](https://cran.r-project.org/package=RTSA)

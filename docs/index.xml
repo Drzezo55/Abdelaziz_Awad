@@ -12,6 +12,528 @@
 <generator>quarto-1.8.25</generator>
 <lastBuildDate>Thu, 26 Nov 2026 00:00:00 GMT</lastBuildDate>
 <item>
+  <title>Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA</title>
+  <dc:creator>Abdelaziz Awad</dc:creator>
+  <link>https://drzezo55.github.io/Abdelaziz_Awad/posts/meta-analysis-in-r/</link>
+  <description><![CDATA[ 
+<script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
+<script type="module" id="qwebr-monaco-editor-init">
+
+  // Configure the Monaco Editor's loader
+  require.config({
+    paths: {
+      'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs'
+    }
+  });
+</script>
+<script type="module">
+// Function to update Monaco Editors when body class changes
+function updateMonacoEditorsOnBodyClassChange() {
+    // Select the body element
+    const body = document.querySelector('body');
+
+    // Options for the observer (which mutations to observe)
+    const observerOptions = {
+        attributes: true,  // Observe changes to attributes
+        attributeFilter: ['class'] // Only observe changes to the 'class' attribute
+    };
+
+    // Callback function to execute when mutations are observed
+    const bodyClassChangeCallback = function(mutationsList, observer) {
+        for(let mutation of mutationsList) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                // Class attribute has changed
+                // Update all Monaco Editors on the page
+                updateMonacoEditorTheme();
+            }
+        }
+    };
+
+    // Create an observer instance linked to the callback function
+    const observer = new MutationObserver(bodyClassChangeCallback);
+
+    // Start observing the target node for configured mutations
+    observer.observe(body, observerOptions);
+}
+
+// Function to update all instances of Monaco Editors on the page
+function updateMonacoEditorTheme() {
+    // Determine what VS Theme to use
+    const vsThemeToUse = document.body.classList.contains("quarto-dark") ? 'vs-dark' : 'vs' ;
+
+    // Iterate through all initialized Monaco Editors
+    qwebrEditorInstances.forEach( function(editorInstance) { 
+        editorInstance.updateOptions({ theme: vsThemeToUse }); 
+    });
+}
+
+// Call the function to start observing changes to body class
+updateMonacoEditorsOnBodyClassChange();
+</script>
+<script type="module">
+// Global array to store Monaco Editor instances
+globalThis.qwebrEditorInstances = [];
+
+function isValidCodeLineNumbers(stringCodeLineNumbers) {
+  // Regular expression to match valid input strings
+  const regex = /^(\d+(-\d+)?)(,\d+(-\d+)?)*$/;
+  return regex.test(stringCodeLineNumbers);
+}
+
+// Function that builds and registers a Monaco Editor instance    
+globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
+
+  const initialCode = cellData.code;
+  const qwebrCounter = cellData.id;
+  const qwebrOptions = cellData.options;
+
+  // Retrieve the previously created document elements
+  let runButton = document.getElementById(`qwebr-button-run-${qwebrCounter}`);
+  let resetButton = document.getElementById(`qwebr-button-reset-${qwebrCounter}`);
+  let copyButton = document.getElementById(`qwebr-button-copy-${qwebrCounter}`);
+  let editorDiv = document.getElementById(`qwebr-editor-${qwebrCounter}`);
+
+  // Load the Monaco Editor and create an instance
+  let editor;
+  require(['vs/editor/editor.main'], function () {
+    editor = monaco.editor.create(editorDiv, {
+      value: initialCode,
+      language: 'r',
+      theme: 'vs-light',
+      automaticLayout: true,           // Works wonderfully with RevealJS
+      scrollBeyondLastLine: false,
+      minimap: {
+        enabled: false
+      },
+      fontSize: qwebrScaledFontSize(editorDiv, qwebrOptions),         
+      renderLineHighlight: "none",      // Disable current line highlighting
+      hideCursorInOverviewRuler: true,  // Remove cursor indictor in right hand side scroll bar
+      readOnly: qwebrOptions['read-only'] ?? false,
+      quickSuggestions: qwebrOptions['editor-quick-suggestions'] ?? false,
+      wordWrap: (qwebrOptions['editor-word-wrap'] == 'true' ? "on" : "off")
+    });
+
+    // Store the official counter ID to be used in keyboard shortcuts
+    editor.__qwebrCounter = qwebrCounter;
+
+    // Store the official div container ID
+    editor.__qwebrEditorId = `qwebr-editor-${qwebrCounter}`;
+
+    // Store the initial code value and options
+    editor.__qwebrinitialCode = initialCode;
+    editor.__qwebrOptions = qwebrOptions;
+
+    // Set at the model level the preferred end of line (EOL) character to LF.
+    // This prevent `\r\n` from being given to the webR engine if the user is on Windows.
+    // See details in: https://github.com/coatless/quarto-webr/issues/94
+    // Associated error text: 
+    // Error: <text>:1:7 unexpected input
+
+    // Retrieve the underlying model
+    const model = editor.getModel();
+    // Set EOL for the model
+    model.setEOL(monaco.editor.EndOfLineSequence.LF);
+    
+    // Dynamically modify the height of the editor window if new lines are added.
+    let ignoreEvent = false;
+    const updateHeight = () => {
+      // Increment editor height by 2 to prevent vertical scroll bar from appearing
+      const contentHeight = editor.getContentHeight() + 2;
+
+      // Retrieve editor-max-height option
+      const maxEditorHeight = qwebrOptions['editor-max-height'];
+
+      // If editor-max-height is missing, allow infinite growth. Otherwise, threshold.
+      const editorHeight = !maxEditorHeight ?  contentHeight : Math.min(contentHeight, maxEditorHeight);
+
+      // We're avoiding a width change
+      //editorDiv.style.width = `${width}px`;
+      editorDiv.style.height = `${editorHeight}px`;
+      try {
+        ignoreEvent = true;
+
+        // The key to resizing is this call
+        editor.layout();
+      } finally {
+        ignoreEvent = false;
+      }
+    };
+
+    // Function to generate decorations to highlight lines
+    // in the editor based on input string.
+    function decoratorHighlightLines(codeLineNumbers) {
+      // Store the lines to be lighlight
+      let linesToHighlight = [];
+      
+      // Parse the codeLineNumbers string to get the line numbers to highlight
+      // First, split the string by commas
+      codeLineNumbers.split(',').forEach(part => {
+        // Check if we have a range of lines
+        if (part.includes('-')) {
+            // Handle range of lines (e.g., "6-8")
+            const [start, end] = part.split('-').map(Number);
+            for (let i = start; i <= end; i++) {
+                linesToHighlight.push(i);
+            }
+        } else {
+            // Handle single line (e.g., "7")
+            linesToHighlight.push(Number(part));
+        }
+      });
+  
+      // Create monaco decorations for the lines to highlight
+      const decorations = linesToHighlight.map(lineNumber => ({
+          range: new monaco.Range(lineNumber, 1, lineNumber, 1),
+          options: {
+              isWholeLine: true,
+              className: 'qwebr-editor-highlight-line'
+          }
+      }));
+  
+      // Return decorations to be applied to the editor
+      return decorations;
+    }
+
+    // Ensure that the editor-code-line-numbers option is set and valid
+    // then apply styling
+    if (qwebrOptions['editor-code-line-numbers']) {
+      // Remove all whitespace from the string
+      const codeLineNumbers = qwebrOptions['editor-code-line-numbers'].replace(/\s/g,'');
+      // Check if the string is valid for line numbers, e.g., "1,3-5,7"
+      if (isValidCodeLineNumbers(codeLineNumbers)) {
+        // Apply the decorations to the editor
+        editor.createDecorationsCollection(decoratorHighlightLines(codeLineNumbers));
+      } else {
+        // Warn the user that the input is invalid
+        console.warn(`Invalid "editor-code-line-numbers" value in code cell ${qwebrOptions['label']}: ${codeLineNumbers}`);
+      }
+    }
+
+    // Helper function to check if selected text is empty
+    function isEmptyCodeText(selectedCodeText) {
+      return (selectedCodeText === null || selectedCodeText === undefined || selectedCodeText === "");
+    }
+
+    // Registry of keyboard shortcuts that should be re-added to each editor window
+    // when focus changes.
+    const addWebRKeyboardShortCutCommands = () => {
+      // Add a keydown event listener for Shift+Enter to run all code in cell
+      editor.addCommand(monaco.KeyMod.Shift | monaco.KeyCode.Enter, () => {
+
+        // Retrieve all text inside the editor
+        qwebrExecuteCode(editor.getValue(), editor.__qwebrCounter, editor.__qwebrOptions);
+      });
+
+      // Add a keydown event listener for CMD/Ctrl+Enter to run selected code
+      editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
+
+        // Get the selected text from the editor
+        const selectedText = editor.getModel().getValueInRange(editor.getSelection());
+        // Check if no code is selected
+        if (isEmptyCodeText(selectedText)) {
+          // Obtain the current cursor position
+          let currentPosition = editor.getPosition();
+          // Retrieve the current line content
+          let currentLine = editor.getModel().getLineContent(currentPosition.lineNumber);
+
+          // Propose a new position to move the cursor to
+          let newPosition = new monaco.Position(currentPosition.lineNumber + 1, 1);
+
+          // Check if the new position is beyond the last line of the editor
+          if (newPosition.lineNumber > editor.getModel().getLineCount()) {
+            // Add a new line at the end of the editor
+            editor.executeEdits("addNewLine", [{
+            range: new monaco.Range(newPosition.lineNumber, 1, newPosition.lineNumber, 1),
+            text: "\n", 
+            forceMoveMarkers: true,
+            }]);
+          }
+          
+          // Run the entire line of code.
+          qwebrExecuteCode(currentLine, editor.__qwebrCounter, editor.__qwebrOptions);
+
+          // Move cursor to new position
+          editor.setPosition(newPosition);
+        } else {
+          // Code to run when Ctrl+Enter is pressed with selected code
+          qwebrExecuteCode(selectedText, editor.__qwebrCounter, editor.__qwebrOptions);
+        }
+      });
+    }
+
+    // Register an on focus event handler for when a code cell is selected to update
+    // what keyboard shortcut commands should work.
+    // This is a workaround to fix a regression that happened with multiple
+    // editor windows since Monaco 0.32.0 
+    // https://github.com/microsoft/monaco-editor/issues/2947
+    editor.onDidFocusEditorText(addWebRKeyboardShortCutCommands);
+
+    // Register an on change event for when new code is added to the editor window
+    editor.onDidContentSizeChange(updateHeight);
+
+    // Manually re-update height to account for the content we inserted into the call
+    updateHeight();
+
+    // Store the editor instance in the global dictionary
+    qwebrEditorInstances[editor.__qwebrCounter] = editor;
+
+  });
+
+  // Add a click event listener to the run button
+  runButton.onclick = function () {
+    qwebrExecuteCode(editor.getValue(), editor.__qwebrCounter, editor.__qwebrOptions);
+  };
+
+  // Add a click event listener to the reset button
+  copyButton.onclick = function () {
+    // Retrieve current code data
+    const data = editor.getValue();
+    
+    // Write code data onto the clipboard.
+    navigator.clipboard.writeText(data || "");
+  };
+  
+  // Add a click event listener to the copy button
+  resetButton.onclick = function () {
+    editor.setValue(editor.__qwebrinitialCode);
+  };
+  
+}
+</script>
+
+
+
+
+<p>This tutorial walks through a complete meta-analysis in R, from pooling the studies to checking whether the evidence is actually conclusive. <strong>Every code box is live</strong>: press <strong>Run Code</strong> to execute it in your browser, then edit the code and run it again. Nothing needs to be installed.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>First run takes a few seconds
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The page downloads R and the packages (<code>metafor</code>, <code>RTSA</code>) the first time. Wait until the status bar at the top of the page says it’s ready, then run the boxes <strong>in order</strong>: each box uses objects created by the ones above it.</p>
+</div>
+</div>
+<section id="the-example-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-example-data">The example data</h2>
+<p>We use a classic dataset that ships with <code>metafor</code>: 13 trials of the <strong>BCG vaccine</strong> for preventing tuberculosis (<code>dat.bcg</code>). For each trial we have the number of TB cases and non-cases in the vaccinated (<code>tpos</code>, <code>tneg</code>) and control (<code>cpos</code>, <code>cneg</code>) groups, plus two study characteristics we’ll use later: how participants were allocated (<code>alloc</code>) and the absolute latitude of the study site (<code>ablat</code>).</p>
+<div id="qwebr-insertion-location-1"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="calculate-effect-sizes" class="level2">
+<h2 class="anchored" data-anchor-id="calculate-effect-sizes">1. Calculate effect sizes</h2>
+<p><code>escalc()</code> computes an effect size and its sampling variance for each study. We use the <strong>log risk ratio</strong> (<code>measure = "RR"</code>). Meta-analysis of ratios is done on the log scale and converted back at the end.</p>
+<div id="qwebr-insertion-location-2"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p><code>yi</code> is the log risk ratio and <code>vi</code> its variance. A negative <code>yi</code> means fewer TB cases in the vaccinated group.</p>
+</section>
+<section id="random-effects-meta-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="random-effects-meta-analysis">2. Random-effects meta-analysis</h2>
+<p>Trials differ in populations and settings, so we assume the true effect varies between studies and fit a <strong>random-effects model</strong> (REML estimator, the <code>metafor</code> default).</p>
+<div id="qwebr-insertion-location-3"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Convert the pooled estimate back to a risk ratio, with its 95% CI and prediction interval:</p>
+<div id="qwebr-insertion-location-4"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p><strong>How to read it:</strong></p>
+<ul>
+<li><strong>Pooled RR ≈ 0.49 (95% CI 0.34 to 0.70):</strong> on average, vaccination roughly halves the risk of TB.</li>
+<li><strong>I² ≈ 92% and Q-test p &lt; 0.0001:</strong> heterogeneity is very high. The trials disagree a lot more than chance would explain.</li>
+<li><strong>95% prediction interval ≈ 0.15 to 1.55:</strong> a <em>new</em> trial could find anything from a large benefit to no benefit. With this much heterogeneity, the prediction interval matters as much as the pooled estimate.</li>
+</ul>
+<section id="forest-plot" class="level3">
+<h3 class="anchored" data-anchor-id="forest-plot">Forest plot</h3>
+<div id="qwebr-insertion-location-5"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+</section>
+<section id="subgroup-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="subgroup-analysis">3. Subgroup analysis</h2>
+<p>Does the effect differ by <strong>allocation method</strong> (random, alternate, systematic)? First, pool the studies within each subgroup separately:</p>
+<div id="qwebr-insertion-location-6"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Then test whether the subgroups <strong>differ from each other</strong>. Adding <code>alloc</code> as a moderator gives the test for subgroup differences (the <code>QM</code> statistic):</p>
+<div id="qwebr-insertion-location-7"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>The test of moderators gives <strong>QM ≈ 1.77, df = 2, p ≈ 0.41</strong>: no evidence that the effect differs by allocation method. The subgroup estimates look different, but the differences are compatible with chance.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Good practice for subgroups
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pre-specify subgroups in your protocol, keep them few, and judge them by the <strong>test for subgroup differences</strong>, not by whether one subgroup is “significant” and another isn’t.</p>
+</div>
+</div>
+<section id="meta-regression-a-continuous-moderator" class="level3">
+<h3 class="anchored" data-anchor-id="meta-regression-a-continuous-moderator">Meta-regression: a continuous moderator</h3>
+<p>Subgroups split studies into categories. For a continuous characteristic such as <strong>latitude</strong>, use meta-regression:</p>
+<div id="qwebr-insertion-location-8"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Latitude is strongly associated with the effect (<strong>p &lt; 0.0001</strong>) and explains about <strong>76% of the heterogeneity</strong> (R²). The vaccine works better further from the equator.</p>
+</section>
+</section>
+<section id="publication-bias" class="level2">
+<h2 class="anchored" data-anchor-id="publication-bias">4. Publication bias</h2>
+<p>Small studies with “negative” results are less likely to be published, which can make the pooled effect look too good. Start with a <strong>funnel plot</strong>: without bias, the studies should scatter symmetrically around the pooled estimate.</p>
+<div id="qwebr-insertion-location-9"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Then use formal tests:</p>
+<div id="qwebr-insertion-location-10"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Neither test suggests asymmetry (Egger p ≈ 0.42, Begg p ≈ 0.95).</p>
+<p><strong>Trim-and-fill</strong> estimates how many studies might be “missing” and adds them to see how the result would change:</p>
+<div id="qwebr-insertion-location-11"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>One study is imputed, and the adjusted RR (≈ 0.52) barely moves, so the conclusion holds.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Interpret with care
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These tests have low power with fewer than about 10 studies, and funnel asymmetry can come from heterogeneity, not just publication bias. Here, heterogeneity is very high, so treat all of these results as rough checks.</p>
+</div>
+</div>
+</section>
+<section id="trial-sequential-analysis-tsa" class="level2">
+<h2 class="anchored" data-anchor-id="trial-sequential-analysis-tsa">5. Trial sequential analysis (TSA)</h2>
+<p>A conventional meta-analysis can look “significant” just because it was tested repeatedly as trials accumulated, or because there isn’t yet enough information. <strong>TSA</strong> treats the meta-analysis like a sequential trial. It calculates the <strong>required information size</strong> (the number of participants needed for a reliable answer) and draws <strong>monitoring boundaries</strong> that the cumulative Z-curve must cross before you can call the result firm.</p>
+<p>We use the <a href="https://cran.r-project.org/package=RTSA"><code>RTSA</code></a> package. It needs the event counts and group sizes, with trials in chronological order:</p>
+<div id="qwebr-insertion-location-12"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Now run the TSA. We assume a minimal clinically relevant effect of <strong>RR = 0.8</strong> (a 20% relative risk reduction), α = 5% (two-sided) and 80% power, with O’Brien-Fleming alpha-spending boundaries:</p>
+<div id="qwebr-insertion-location-13"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div id="qwebr-insertion-location-14"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p><strong>How to read it:</strong></p>
+<ul>
+<li>The conventional random-effects result is “significant” (naive <strong>p ≈ 0.002</strong>).</li>
+<li>But with this much heterogeneity and a low event rate, the <strong>required information size is huge</strong>: about 3.5 million participants. The trials provide only about <strong>10%</strong> of it.</li>
+<li>The <strong>TSA-adjusted 95% CI (≈ 0.01 to 18)</strong> is extremely wide, and the Z-curve hasn’t crossed the monitoring boundary.</li>
+</ul>
+<p>So, by TSA standards, this body of evidence is <strong>not yet conclusive</strong>, even though the ordinary meta-analysis looks clear. This is exactly the situation TSA is designed to flag: an apparently significant result that rests on too little information once heterogeneity is accounted for.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Try it yourself
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Change <code>mc = 0.8</code> to <code>mc = 0.5</code> (you’re now only interested in halving the risk) and run the box again. How does the required information size change?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Limitation of this example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>TSA is meant to be planned prospectively. Running it after the fact, as here, is a sensitivity analysis, and <code>RTSA</code> warns about this in its output.</p>
+</div>
+</div>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Function</th>
+<th>Result for the BCG trials</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Effect sizes</td>
+<td><code>escalc()</code></td>
+<td>Log risk ratios for 13 trials</td>
+</tr>
+<tr class="even">
+<td>Pooled effect</td>
+<td><code>rma()</code></td>
+<td>RR 0.49 (0.34 to 0.70), I² ≈ 92%</td>
+</tr>
+<tr class="odd">
+<td>Subgroups</td>
+<td><code>rma(mods = ~ alloc)</code></td>
+<td>No difference by allocation (p ≈ 0.41)</td>
+</tr>
+<tr class="even">
+<td>Meta-regression</td>
+<td><code>rma(mods = ~ ablat)</code></td>
+<td>Latitude explains ≈ 76% of heterogeneity</td>
+</tr>
+<tr class="odd">
+<td>Publication bias</td>
+<td><code>funnel()</code>, <code>regtest()</code>, <code>ranktest()</code>, <code>trimfill()</code></td>
+<td>No clear asymmetry; adjusted RR ≈ 0.52</td>
+</tr>
+<tr class="even">
+<td>TSA</td>
+<td><code>RTSA()</code></td>
+<td>Only ≈ 10% of required information; not conclusive</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="run-it-on-your-own-computer" class="level2">
+<h2 class="anchored" data-anchor-id="run-it-on-your-own-computer">Run it on your own computer</h2>
+<p>Everything above also works in regular R or RStudio. Install the packages once:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">install.packages</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"metafor"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"RTSA"</span>))</span></code></pre></div></div>
+<p>Then copy the code from each box, in order.</p>
+<p><strong>Further reading</strong></p>
+<ul>
+<li>Viechtbauer W. Conducting meta-analyses in R with the metafor package. <em>Journal of Statistical Software</em>. 2010;36(3):1–48.</li>
+<li><a href="https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/">Doing Meta-Analysis in R</a>, a free online book</li>
+<li><a href="https://training.cochrane.org/handbook">Cochrane Handbook, chapter 10: Analysing data and undertaking meta-analyses</a></li>
+<li><a href="https://cran.r-project.org/package=RTSA">RTSA package documentation</a></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>Clinical Research</category>
+  <category>Data Science</category>
+  <guid>https://drzezo55.github.io/Abdelaziz_Awad/posts/meta-analysis-in-r/</guid>
+  <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://drzezo55.github.io/Abdelaziz_Awad/posts/meta-analysis-in-r/forest.png" medium="image" type="image/png" height="103" width="144"/>
+</item>
+<item>
   <title>Welcome to my website</title>
   <dc:creator>Abdelaziz Awad</dc:creator>
   <link>https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/</link>
