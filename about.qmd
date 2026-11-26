@@ -1,4 +1,4 @@
----
+﻿---
 title: "Abdelaziz Awad"
 image: profile.jpg
 toc: false
@@ -16,7 +16,7 @@ about:
       href: mailto:you@example.com
 ---
 
-<!-- TODO: replace profile.jpg with your own photo (same file name), and update the links above -->
+<!-- TODO: update the LinkedIn and email links above -->
 
 Hi! I'm Abdelaziz. I share educational content, open research project opportunities,
 and posts about data science and statistics.
