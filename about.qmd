@@ -16,10 +16,9 @@ about:
       href: https://github.com/Drzezo55
     - icon: envelope
       text: Email
-      href: mailto:you@example.com
+      href: mailto:awad.abdelaziz.0505@gmail.com
 ---
 
-<!-- TODO: update the email link above -->
 
 Hi! I'm Abdelaziz. I share educational content, open research project opportunities,
 and posts about data science and statistics.
