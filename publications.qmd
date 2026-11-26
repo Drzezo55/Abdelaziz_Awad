@@ -6,7 +6,7 @@ toc: false
 
 ::: {.callout-note appearance="simple"}
 The full, always up-to-date list (with citation counts) is on my
-[Google Scholar profile](https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID){.btn .btn-primary .btn-sm}
+[Google Scholar profile](https://scholar.google.com/citations?user=3jWeyoUAAAAJ){.btn .btn-primary .btn-sm}
 :::
 
 <!--
