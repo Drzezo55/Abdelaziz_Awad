@@ -3,7 +3,7 @@ title: "Interactive meta-analysis in R: pooling, subgroups, publication bias and
 author: "Abdelaziz Awad"
 date: "2026-11-26"
 categories: [Clinical Research, Data Science]
-description: "A hands-on tutorial you can run in your browser, for binary (events/total) and continuous (mean, SD, n) outcomes: random-effects meta-analysis, subgroup analysis, publication bias and trial sequential analysis with metafor and RTSA."
+description: "A hands-on tutorial you can run in your browser, for binary (events/total) and continuous (mean, SD, n) outcomes: random-effects meta-analysis, leave-one-out sensitivity analysis, subgroup analysis, publication bias and trial sequential analysis with metafor and RTSA."
 image: forest.png
 filters:
   - webr
@@ -36,6 +36,12 @@ uses objects created by the ones above it.
 ```{webr-r}
 library(metafor)
 library(RTSA)
+
+# colours used in all plots
+teal     <- "#0b7a75"                        # individual studies
+orange   <- "#e95420"                        # pooled results
+contours <- c("white", "#fee8c8", "#fdd49e")  # funnel plot: p > 0.10, 0.05-0.10, 0.01-0.05
+sig_back <- "#fdae6b"                        # funnel plot: p < 0.01
 ```
 
 # Part A: Binary outcomes (events and total)
@@ -121,8 +127,37 @@ predict(res, transf = exp, digits = 2)
 ```{webr-r}
 forest(res, atransf = exp,
        header = c("Study", "RR [95% CI]"),
-       xlab = "Risk ratio (log scale)")
+       xlab = "Risk ratio (log scale)",
+       colout = teal,                 # study squares and CIs
+       col = orange, border = orange, # pooled diamond
+       shade = TRUE)                  # zebra stripes
 ```
+
+### Leave-one-out sensitivity analysis
+
+Is the result driven by a single trial? **Leave-one-out analysis** re-runs the
+meta-analysis 13 times, leaving out one study each time:
+
+```{webr-r}
+l1o <- leave1out(res)
+print(l1o, transf = exp, digits = 2)
+```
+
+Plot the 13 re-pooled estimates. The orange dashed line is the result with all studies:
+
+```{webr-r}
+forest(l1o$estimate, sei = l1o$se,
+       slab = dat$study,
+       refline = coef(res), atransf = exp,
+       header = c("Study left out", "RR [95% CI]"),
+       xlab = "Pooled risk ratio (log scale)",
+       col = teal, shade = TRUE)
+abline(v = coef(res), col = orange, lwd = 2, lty = 2)
+```
+
+The pooled RR stays between **0.45** (omitting TPT Madras 1980) and **0.53** (omitting
+Hart & Sutherland 1977), and every confidence interval stays below 1. **No single trial
+changes the conclusion**, so the result is robust.
 
 ## A4. Subgroup analysis
 
@@ -163,7 +198,9 @@ Subgroups split studies into categories. For a continuous characteristic such as
 ```{webr-r}
 mr <- rma(yi, vi, mods = ~ ablat, data = dat)
 mr
-regplot(mr, transf = exp, xlab = "Absolute latitude (degrees)", ylab = "Risk ratio")
+regplot(mr, transf = exp, xlab = "Absolute latitude (degrees)", ylab = "Risk ratio",
+        col = teal, bg = adjustcolor(teal, 0.6),       # study bubbles (size = weight)
+        lcol = orange, shade = adjustcolor(orange, 0.15))  # regression line and 95% CI
 ```
 
 Latitude is strongly associated with the effect (**p < 0.0001**) and explains about
@@ -175,8 +212,14 @@ Small studies with "negative" results are less likely to be published, which can
 pooled effect look too good. Start with a **funnel plot**: without bias, the studies
 should scatter symmetrically around the pooled estimate.
 
+We draw a **contour-enhanced funnel plot**: the coloured zones show where a study's result
+would be statistically significant. If studies are missing mainly from the white
+(non-significant) zone, publication bias is a likely cause of asymmetry.
+
 ```{webr-r}
-funnel(res, xlab = "Log risk ratio")
+funnel(res, level = c(90, 95, 99), shade = contours, back = sig_back,
+       refline = 0, legend = TRUE, col = teal, pch = 19,
+       xlab = "Log risk ratio")
 ```
 
 Then use formal tests:
@@ -194,7 +237,9 @@ how the result would change:
 ```{webr-r}
 tf <- trimfill(res)
 tf
-funnel(tf, xlab = "Log risk ratio")   # filled studies are shown as open circles
+funnel(tf, level = c(90, 95, 99), shade = contours, back = sig_back,
+       refline = 0, legend = TRUE, col = teal, pch = 19,
+       xlab = "Log risk ratio")   # imputed studies are shown as open circles
 predict(tf, transf = exp, digits = 2)
 ```
 
@@ -330,7 +375,8 @@ predict(res_c, digits = 2)
 
 ```{webr-r}
 forest(res_c, header = c("Study", "SMD [95% CI]"),
-       xlab = "Standardized mean difference (Hedges' g)")
+       xlab = "Standardized mean difference (Hedges' g)",
+       colout = teal, col = orange, border = orange, shade = TRUE)
 ```
 
 **How to read it:**
@@ -340,6 +386,26 @@ forest(res_c, header = c("Study", "SMD [95% CI]"),
 - **I² ≈ 54%, Q-test p ≈ 0.008:** moderate heterogeneity.
 - **95% prediction interval ≈ −0.60 to 0.21:** in a new setting, the effect could range from a
   moderate benefit to none.
+
+### Leave-one-out sensitivity analysis
+
+```{webr-r}
+l1o_c <- leave1out(res_c)
+print(l1o_c, digits = 2)
+
+forest(l1o_c$estimate, sei = l1o_c$se,
+       slab = dat_c$study,
+       refline = coef(res_c),
+       header = c("Study left out", "SMD [95% CI]"),
+       xlab = "Pooled SMD (Hedges' g)",
+       col = teal, shade = TRUE)
+abline(v = coef(res_c), col = orange, lwd = 2, lty = 2)
+```
+
+The pooled SMD ranges from **−0.15** (omitting Ghosh 1998) to **−0.23** (omitting Hilton
+1986) and stays statistically significant whichever study is removed. Leaving out
+**Ghosh 1998** lowers I² from about 54% to 38%, so this trial contributes much of the
+heterogeneity. That's worth checking in the original paper.
 
 ## B4. Subgroup analysis
 
@@ -363,7 +429,8 @@ is a hypothesis to test in future trials, not a firm conclusion.
 ## B5. Publication bias
 
 ```{webr-r}
-funnel(res_c, xlab = "Hedges' g")
+funnel(res_c, level = c(90, 95, 99), shade = contours, back = sig_back,
+       refline = 0, legend = TRUE, col = teal, pch = 19, xlab = "Hedges' g")
 regtest(res_c)
 ranktest(res_c)
 ```
@@ -374,7 +441,8 @@ trim-and-fill:
 ```{webr-r}
 tf_c <- trimfill(res_c)
 tf_c
-funnel(tf_c, xlab = "Hedges' g")
+funnel(tf_c, level = c(90, 95, 99), shade = contours, back = sig_back,
+       refline = 0, legend = TRUE, col = teal, pch = 19, xlab = "Hedges' g")
 ```
 
 Trim-and-fill imputes **4 missing studies** on the right (no benefit) side, and the
@@ -441,6 +509,7 @@ sensitivity analysis, and `RTSA` warns about this in its output.
 | Data | `data.frame()` | events and total per group | mean, SD and n per group |
 | Effect sizes | `escalc()` | `measure = "RR"` | `measure = "SMD"` |
 | Pooled effect | `rma()` | RR 0.49 (0.34 to 0.70), I² ≈ 92% | SMD −0.19 (−0.34 to −0.05), I² ≈ 54% |
+| Leave-one-out | `leave1out()` | Robust: RR 0.45 to 0.53 | Robust: SMD −0.15 to −0.23 |
 | Subgroups | `rma(mods = ~ group)` | No difference by allocation (p ≈ 0.41) | Optimal vs partial, borderline (p ≈ 0.06) |
 | Publication bias | `funnel()`, `regtest()`, `ranktest()`, `trimfill()` | No clear asymmetry; adjusted RR ≈ 0.52 | Tests negative, but trim-and-fill removes the effect |
 | TSA | `RTSA()` | ≈ 10% of required information; not conclusive | ≈ 51% of required information; not conclusive |
