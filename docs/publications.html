@@ -262,10 +262,34 @@ ul.task-list li input[type="checkbox"] {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Posts</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-posts" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Posts</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-posts">    
+        <li>
+    <a class="dropdown-item" href="./index.html">
+ <span class="dropdown-text">All posts</span></a>
   </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="./index.html#category=Clinical Research">
+ <span class="dropdown-text">Clinical Research</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./index.html#category=Data Science">
+ <span class="dropdown-text">Data Science</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./index.html#category=AI">
+ <span class="dropdown-text">AI</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./index.html#category=Bioinformatics">
+ <span class="dropdown-text">Bioinformatics</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="./opportunities.html"> 
 <span class="menu-text">Research Opportunities</span></a>

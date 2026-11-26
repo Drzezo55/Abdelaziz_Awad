@@ -95,7 +95,7 @@
     "href": "posts/welcome/index.html",
     "title": "Welcome to my website",
     "section": "",
-    "text": "Welcome! This is where I’ll share:\n\nEducational content — research methods, statistics, and how-to guides\nResearch project opportunities — open projects you can join (see Research Opportunities)\nData science posts & news — tutorials in R and Python, and updates worth knowing\n\nWant to be notified about new posts? Subscribe for free."
+    "text": "Welcome! Posts here are organised into four topics:\n\nClinical Research — research methods, systematic reviews and meta-analysis, and how-to guides\nData Science — statistics and tutorials in R and Python\nAI — artificial intelligence in medicine and research, and tools worth knowing\nBioinformatics — analysing biological and omics data\n\nI also post open research projects you can join — see Research Opportunities.\nWant to be notified about new posts? Subscribe for free."
   },
   {
     "objectID": "opportunities.html",
@@ -151,6 +151,6 @@
     "href": "index.html",
     "title": "Posts",
     "section": "",
-    "text": "Welcome to my website\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nNov 26, 2026\n\n\nAbdelaziz Awad\n\n\n\n\n\nNo matching items"
+    "text": "Welcome to my website\n\n\n\nClinical Research\n\nData Science\n\nAI\n\nBioinformatics\n\n\n\nWhat this site covers: clinical research, data science, AI, bioinformatics, and open research projects you can join.\n\n\n\n\n\nNov 26, 2026\n\n\nAbdelaziz Awad\n\n\n\n\n\nNo matching items"
   }
 ]

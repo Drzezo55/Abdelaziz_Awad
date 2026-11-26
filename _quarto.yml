@@ -6,7 +6,7 @@ project:
 
 website:
   title: "Abdelaziz Awad"
-  description: "Educational content, research project opportunities, and data science posts."
+  description: "Posts on clinical research, data science, AI and bioinformatics, plus research project opportunities."
   site-url: https://drzezo55.github.io/Abdelaziz_Awad
   favicon: profile.jpg
   search: true
@@ -14,7 +14,18 @@ website:
   navbar:
     left:
       - text: "Posts"
-        href: index.qmd
+        menu:
+          - text: "All posts"
+            href: index.qmd
+          - text: "---"
+          - text: "Clinical Research"
+            href: "index.qmd#category=Clinical%20Research"
+          - text: "Data Science"
+            href: "index.qmd#category=Data%20Science"
+          - text: "AI"
+            href: "index.qmd#category=AI"
+          - text: "Bioinformatics"
+            href: "index.qmd#category=Bioinformatics"
       - text: "Research Opportunities"
         href: opportunities.qmd
       - text: "Publications"
