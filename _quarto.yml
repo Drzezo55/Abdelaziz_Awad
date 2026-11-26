@@ -51,8 +51,6 @@ website:
 
 format:
   html:
-    theme:
-      light: united
-      dark: darkly          # adds a light/dark toggle
+    theme: united
     css: styles.css
     toc: true
