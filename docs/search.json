@@ -1,10 +1,31 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Posts",
+    "objectID": "subscribe.html",
+    "href": "subscribe.html",
+    "title": "Subscribe",
     "section": "",
-    "text": "Welcome to my website\n\n\n\nClinical Research\n\nData Science\n\nAI\n\nBioinformatics\n\nResearch Opportunities\n\n\n\nWhat this site covers: clinical research, data science, AI, bioinformatics, and open research projects you can join.\n\n\n\n\n\nNov 26, 2026\n\n\nAbdelaziz Awad\n\n\n\n\n\nNo matching items"
+    "text": "Email subscription form coming soon."
+  },
+  {
+    "objectID": "subscribe.html#by-email",
+    "href": "subscribe.html#by-email",
+    "title": "Subscribe",
+    "section": "",
+    "text": "Email subscription form coming soon."
+  },
+  {
+    "objectID": "subscribe.html#by-rss",
+    "href": "subscribe.html#by-rss",
+    "title": "Subscribe",
+    "section": "📡 By RSS",
+    "text": "📡 By RSS\nUse any feed reader (Feedly, Inoreader, …) and add this link:\nindex.xml"
+  },
+  {
+    "objectID": "subscribe.html#on-linkedin",
+    "href": "subscribe.html#on-linkedin",
+    "title": "Subscribe",
+    "section": "💼 On LinkedIn",
+    "text": "💼 On LinkedIn\nNew posts are also shared on LinkedIn."
   },
   {
     "objectID": "about.html",
@@ -42,32 +63,67 @@
     "text": "Get in touch\nWant to collaborate, or have an idea for a tutorial? Email me or connect on LinkedIn. Open projects are listed under Research Opportunities."
   },
   {
-    "objectID": "subscribe.html",
-    "href": "subscribe.html",
-    "title": "Subscribe",
+    "objectID": "posts/meta-analysis-in-r/index.html",
+    "href": "posts/meta-analysis-in-r/index.html",
+    "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
     "section": "",
-    "text": "Email subscription form coming soon."
+    "text": "This tutorial walks through a complete meta-analysis in R, from pooling the studies to checking whether the evidence is actually conclusive. Every code box is live: press Run Code to execute it in your browser, then edit the code and run it again. Nothing needs to be installed."
   },
   {
-    "objectID": "subscribe.html#by-email",
-    "href": "subscribe.html#by-email",
-    "title": "Subscribe",
-    "section": "",
-    "text": "Email subscription form coming soon."
+    "objectID": "posts/meta-analysis-in-r/index.html#the-example-data",
+    "href": "posts/meta-analysis-in-r/index.html#the-example-data",
+    "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
+    "section": "The example data",
+    "text": "The example data\nWe use a classic dataset that ships with metafor: 13 trials of the BCG vaccine for preventing tuberculosis (dat.bcg). For each trial we have the number of TB cases and non-cases in the vaccinated (tpos, tneg) and control (cpos, cneg) groups, plus two study characteristics we’ll use later: how participants were allocated (alloc) and the absolute latitude of the study site (ablat).\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
-    "objectID": "subscribe.html#by-rss",
-    "href": "subscribe.html#by-rss",
-    "title": "Subscribe",
-    "section": "📡 By RSS",
-    "text": "📡 By RSS\nUse any feed reader (Feedly, Inoreader, …) and add this link:\nindex.xml"
+    "objectID": "posts/meta-analysis-in-r/index.html#calculate-effect-sizes",
+    "href": "posts/meta-analysis-in-r/index.html#calculate-effect-sizes",
+    "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
+    "section": "1. Calculate effect sizes",
+    "text": "1. Calculate effect sizes\nescalc() computes an effect size and its sampling variance for each study. We use the log risk ratio (measure = \"RR\"). Meta-analysis of ratios is done on the log scale and converted back at the end.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nyi is the log risk ratio and vi its variance. A negative yi means fewer TB cases in the vaccinated group."
   },
   {
-    "objectID": "subscribe.html#on-linkedin",
-    "href": "subscribe.html#on-linkedin",
-    "title": "Subscribe",
-    "section": "💼 On LinkedIn",
-    "text": "💼 On LinkedIn\nNew posts are also shared on LinkedIn."
+    "objectID": "posts/meta-analysis-in-r/index.html#random-effects-meta-analysis",
+    "href": "posts/meta-analysis-in-r/index.html#random-effects-meta-analysis",
+    "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
+    "section": "2. Random-effects meta-analysis",
+    "text": "2. Random-effects meta-analysis\nTrials differ in populations and settings, so we assume the true effect varies between studies and fit a random-effects model (REML estimator, the metafor default).\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nConvert the pooled estimate back to a risk ratio, with its 95% CI and prediction interval:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nHow to read it:\n\nPooled RR ≈ 0.49 (95% CI 0.34 to 0.70): on average, vaccination roughly halves the risk of TB.\nI² ≈ 92% and Q-test p &lt; 0.0001: heterogeneity is very high. The trials disagree a lot more than chance would explain.\n95% prediction interval ≈ 0.15 to 1.55: a new trial could find anything from a large benefit to no benefit. With this much heterogeneity, the prediction interval matters as much as the pooled estimate.\n\n\nForest plot\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "posts/meta-analysis-in-r/index.html#subgroup-analysis",
+    "href": "posts/meta-analysis-in-r/index.html#subgroup-analysis",
+    "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
+    "section": "3. Subgroup analysis",
+    "text": "3. Subgroup analysis\nDoes the effect differ by allocation method (random, alternate, systematic)? First, pool the studies within each subgroup separately:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nThen test whether the subgroups differ from each other. Adding alloc as a moderator gives the test for subgroup differences (the QM statistic):\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nThe test of moderators gives QM ≈ 1.77, df = 2, p ≈ 0.41: no evidence that the effect differs by allocation method. The subgroup estimates look different, but the differences are compatible with chance.\n\n\n\n\n\n\nTipGood practice for subgroups\n\n\n\nPre-specify subgroups in your protocol, keep them few, and judge them by the test for subgroup differences, not by whether one subgroup is “significant” and another isn’t.\n\n\n\nMeta-regression: a continuous moderator\nSubgroups split studies into categories. For a continuous characteristic such as latitude, use meta-regression:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nLatitude is strongly associated with the effect (p &lt; 0.0001) and explains about 76% of the heterogeneity (R²). The vaccine works better further from the equator."
+  },
+  {
+    "objectID": "posts/meta-analysis-in-r/index.html#publication-bias",
+    "href": "posts/meta-analysis-in-r/index.html#publication-bias",
+    "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
+    "section": "4. Publication bias",
+    "text": "4. Publication bias\nSmall studies with “negative” results are less likely to be published, which can make the pooled effect look too good. Start with a funnel plot: without bias, the studies should scatter symmetrically around the pooled estimate.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nThen use formal tests:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nNeither test suggests asymmetry (Egger p ≈ 0.42, Begg p ≈ 0.95).\nTrim-and-fill estimates how many studies might be “missing” and adds them to see how the result would change:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nOne study is imputed, and the adjusted RR (≈ 0.52) barely moves, so the conclusion holds.\n\n\n\n\n\n\nWarningInterpret with care\n\n\n\nThese tests have low power with fewer than about 10 studies, and funnel asymmetry can come from heterogeneity, not just publication bias. Here, heterogeneity is very high, so treat all of these results as rough checks."
+  },
+  {
+    "objectID": "posts/meta-analysis-in-r/index.html#trial-sequential-analysis-tsa",
+    "href": "posts/meta-analysis-in-r/index.html#trial-sequential-analysis-tsa",
+    "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
+    "section": "5. Trial sequential analysis (TSA)",
+    "text": "5. Trial sequential analysis (TSA)\nA conventional meta-analysis can look “significant” just because it was tested repeatedly as trials accumulated, or because there isn’t yet enough information. TSA treats the meta-analysis like a sequential trial. It calculates the required information size (the number of participants needed for a reliable answer) and draws monitoring boundaries that the cumulative Z-curve must cross before you can call the result firm.\nWe use the RTSA package. It needs the event counts and group sizes, with trials in chronological order:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nNow run the TSA. We assume a minimal clinically relevant effect of RR = 0.8 (a 20% relative risk reduction), α = 5% (two-sided) and 80% power, with O’Brien-Fleming alpha-spending boundaries:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nHow to read it:\n\nThe conventional random-effects result is “significant” (naive p ≈ 0.002).\nBut with this much heterogeneity and a low event rate, the required information size is huge: about 3.5 million participants. The trials provide only about 10% of it.\nThe TSA-adjusted 95% CI (≈ 0.01 to 18) is extremely wide, and the Z-curve hasn’t crossed the monitoring boundary.\n\nSo, by TSA standards, this body of evidence is not yet conclusive, even though the ordinary meta-analysis looks clear. This is exactly the situation TSA is designed to flag: an apparently significant result that rests on too little information once heterogeneity is accounted for.\n\n\n\n\n\n\nTipTry it yourself\n\n\n\nChange mc = 0.8 to mc = 0.5 (you’re now only interested in halving the risk) and run the box again. How does the required information size change?\n\n\n\n\n\n\n\n\nNoteLimitation of this example\n\n\n\nTSA is meant to be planned prospectively. Running it after the fact, as here, is a sensitivity analysis, and RTSA warns about this in its output."
+  },
+  {
+    "objectID": "posts/meta-analysis-in-r/index.html#summary",
+    "href": "posts/meta-analysis-in-r/index.html#summary",
+    "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
+    "section": "Summary",
+    "text": "Summary\n\n\n\n\n\n\n\n\nStep\nFunction\nResult for the BCG trials\n\n\n\n\nEffect sizes\nescalc()\nLog risk ratios for 13 trials\n\n\nPooled effect\nrma()\nRR 0.49 (0.34 to 0.70), I² ≈ 92%\n\n\nSubgroups\nrma(mods = ~ alloc)\nNo difference by allocation (p ≈ 0.41)\n\n\nMeta-regression\nrma(mods = ~ ablat)\nLatitude explains ≈ 76% of heterogeneity\n\n\nPublication bias\nfunnel(), regtest(), ranktest(), trimfill()\nNo clear asymmetry; adjusted RR ≈ 0.52\n\n\nTSA\nRTSA()\nOnly ≈ 10% of required information; not conclusive"
+  },
+  {
+    "objectID": "posts/meta-analysis-in-r/index.html#run-it-on-your-own-computer",
+    "href": "posts/meta-analysis-in-r/index.html#run-it-on-your-own-computer",
+    "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
+    "section": "Run it on your own computer",
+    "text": "Run it on your own computer\nEverything above also works in regular R or RStudio. Install the packages once:\ninstall.packages(c(\"metafor\", \"RTSA\"))\nThen copy the code from each box, in order.\nFurther reading\n\nViechtbauer W. Conducting meta-analyses in R with the metafor package. Journal of Statistical Software. 2010;36(3):1–48.\nDoing Meta-Analysis in R, a free online book\nCochrane Handbook, chapter 10: Analysing data and undertaking meta-analyses\nRTSA package documentation"
   },
   {
     "objectID": "posts/welcome/index.html",
@@ -103,5 +159,12 @@
     "title": "Publications",
     "section": "2024",
     "text": "2024\n\nAwad, AA., Itumalla, R., Gaidhane, AM., Khatib, MN., Ballal, S., Bansal, P., & … (2024). Association of electronic cigarette use and suicidal behaviors: a systematic review and meta-analysis. BMC psychiatry. 24 (1), 608\nAwad, AA., Khatib, MN., Gaidhane, AM., Ballal, S., Bansal, P., Srivastava, M., & … (2024). Predictors of acute kidney injury in dengue patients: a systematic review and meta-analysis. Virology Journal. 21 (1), 223\nSerag, I., Abdelhady, M., Awad, AA., Wageeh, A., Shaboub, A., Elhalag, RH., & … (2024). Postoperative elevated bed header position versus supine in the management of chronic subdural hematoma: a systematic review and meta-analysis. Acta Neurologica Belgica. 124 (4), 1177-1187\nMarey, MM., Belal, M., Awad, AA., Rabea, EM., Hassan, MA., Abbas, AW., & … (2024). Efficacy and safety of aldafermin in non-alcoholic steatohepatitis: A systematic review and meta-analysis of randomized controlled trials. Clinics and Research in Hepatology and Gastroenterology. 48 (6), 102357\nAwad, AA., Alkorbi, HA., & Serhan, HA. (2024). Charles Kelman: The father of phacoemulsification. Cureus. 16 (6)\nAwad, AA., Aboelkhier, MM., Mohamed, RG., Abbas, AW., Hageen, AW., & … (2024). Efficacy and safety of ontamalimab in treating inflammatory bowel disease: a systematic review and meta-analysis of randomized controlled trials. Current Pharmacology Reports. 10 (6), 467-484\nAwad, AA., Alkorbi, HA., & Serhan, HA. (2024). Allvar Gullstrand: the only ophthalmologist who won the nobel prize. Cureus. 16 (6)\nAlkorbi, HA., Awad, AA., Hassan, AK., Emoush, LA., Anter, AM., Shraim, BA., & … (2024). Ocular complications of facial fillers and botulinum injections: A comprehensive systematic review. Saudi Ophthalmology (SO) Scientific Meeting. 2024 │The Red Sea\nHazem, A., Awad, AA., Sharaf, MS., Mahmoud, MM., Hassan, MA., Mahmoud, N., & … (2024). S1546 Efficacy and Safety of Endoscopic Submucosal Dissection With Traction-Assisted Method in Comparison to Conventional Method: A Systematic Review and Meta-Analysis. The American Journal of Gastroenterology. 119 (10S), S1121-S1122\nAbosheaishaa, H., Awad, AA., Sharaf, MS., Marey, MM., Hassan, MA., Nassar, M., & … (2024). Efficacy and Safety of Endoscopic Submucosal Dissection With Traction-Assisted Method in Comparison to Conventional Method: A Systematic Review and Meta-Analysis. AMERICAN JOURNAL OF GASTROENTEROLOGY. 119 (10 S), S1121-S1122\nAbosheaishaa, H., Awad, AA., Sharaf, MS., Marey, MM., Hassan, MA., Nassar, M., & … (2024). S1546 Efficacy and Safety of Endoscopic Submucosal Dissection With Traction-Assisted Method in Comparison to Conventional Method: A Systematic Review and Meta-Analysis. Official journal of the American College of Gastroenterology| ACG. 119 (10S …"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Posts",
+    "section": "",
+    "text": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA\n\n\n\nClinical Research\n\nData Science\n\n\n\nA hands-on tutorial you can run in your browser: random-effects meta-analysis, subgroup analysis, meta-regression, publication bias and trial sequential analysis with metafor and RTSA.\n\n\n\n\n\nNov 26, 2026\n\n\nAbdelaziz Awad\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to my website\n\n\n\nClinical Research\n\nData Science\n\nAI\n\nBioinformatics\n\nResearch Opportunities\n\n\n\nWhat this site covers: clinical research, data science, AI, bioinformatics, and open research projects you can join.\n\n\n\n\n\nNov 26, 2026\n\n\nAbdelaziz Awad\n\n\n\n\n\nNo matching items"
   }
 ]
