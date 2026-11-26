@@ -1,0 +1,44 @@
+---
+# HOW TO POST A RESEARCH OPPORTUNITY ON THE GITHUB WEBSITE
+# 1. Open this file on GitHub and copy everything.
+# 2. Go to the "posts" folder → "Add file" → "Create new file".
+# 3. Name it:  opportunity-short-name/index.qmd   (lowercase, hyphens, no spaces)
+# 4. Paste, edit everything below, click "Commit changes".
+# 5. Wait ~2 minutes: it appears under Posts → Research Opportunities.
+#
+# TO CLOSE IT LATER: edit the post, change "🟢 Open" to "🔴 Closed"
+# and delete the "Apply now" line.
+# Lines starting with # are notes — you can delete them.
+
+title: "Open project: Meta-analysis of drug X in condition Y"
+author: "Abdelaziz Awad"
+date: "2026-12-01"          # YYYY-MM-DD (the day you post it)
+categories: [Research Opportunities, Clinical Research]   # keep "Research Opportunities"; add a topic if you like
+description: "Looking for 4 collaborators for screening and data extraction. Deadline 31 Dec 2026."
+---
+
+**Status:** 🟢 Open  · **Deadline:** 2026-12-31  · **Spots:** 4
+
+## About the project
+
+One or two paragraphs on the research question and what the team will do.
+
+## Roles needed
+
+- Literature screening (title/abstract and full text)
+- Data extraction
+- Risk-of-bias assessment
+
+## Requirements
+
+Medical student or graduate, basic English writing, ~5 hours/week.
+
+## Authorship
+
+Contributors who complete their tasks are included as co-authors.
+
+## How to apply
+
+Fill in the form below. Selected applicants will be contacted by email.
+
+[Apply now](https://forms.gle/your-form-link){.btn .btn-primary}

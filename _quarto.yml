@@ -26,12 +26,11 @@ website:
             href: "index.qmd#category=AI"
           - text: "Bioinformatics"
             href: "index.qmd#category=Bioinformatics"
-      - text: "Research Opportunities"
-        href: opportunities.qmd
+          - text: "---"
+          - text: "Research Opportunities"
+            href: "index.qmd#category=Research%20Opportunities"
       - text: "Publications"
         href: publications.qmd
-      - text: "Resources"
-        href: resources.qmd
       - text: "About"
         href: about.qmd
     right:
