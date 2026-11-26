@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Abdelaziz Awad"
 image: profile.jpg
 toc: false
