@@ -2,14 +2,18 @@
 title: "Welcome to my website"
 author: "Abdelaziz Awad"
 date: "2026-11-26"
-categories: [news]
+categories: [Clinical Research, Data Science, AI, Bioinformatics]
+description: "What this site covers: clinical research, data science, AI, bioinformatics, and open research projects you can join."
 image: thumbnail.jpg
 ---
 
-Welcome! This is where I'll share:
+Welcome! Posts here are organised into four topics:
 
-- **Educational content** — research methods, statistics, and how-to guides
-- **Research project opportunities** — open projects you can join (see [Research Opportunities](../../opportunities.qmd))
-- **Data science posts & news** — tutorials in R and Python, and updates worth knowing
+- **Clinical Research** — research methods, systematic reviews and meta-analysis, and how-to guides
+- **Data Science** — statistics and tutorials in R and Python
+- **AI** — artificial intelligence in medicine and research, and tools worth knowing
+- **Bioinformatics** — analysing biological and omics data
+
+I also post open research projects you can join — see [Research Opportunities](../../opportunities.qmd).
 
 Want to be notified about new posts? [Subscribe for free](../../subscribe.qmd).

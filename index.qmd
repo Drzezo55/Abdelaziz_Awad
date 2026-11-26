@@ -1,6 +1,6 @@
 ---
 title: "Posts"
-subtitle: "Tutorials, research tips, and data science news"
+subtitle: "Clinical research · Data science · AI · Bioinformatics"
 listing:
   contents: posts
   feed: true

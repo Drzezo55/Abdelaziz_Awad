@@ -8,7 +8,7 @@
 <title>Abdelaziz Awad</title>
 <link>https://drzezo55.github.io/Abdelaziz_Awad/</link>
 <atom:link href="https://drzezo55.github.io/Abdelaziz_Awad/index.xml" rel="self" type="application/rss+xml"/>
-<description>Educational content, research project opportunities, and data science posts.</description>
+<description>Posts on clinical research, data science, AI and bioinformatics, plus research project opportunities.</description>
 <generator>quarto-1.8.25</generator>
 <lastBuildDate>Thu, 26 Nov 2026 00:00:00 GMT</lastBuildDate>
 <item>
@@ -22,18 +22,23 @@
 
 
 
-<p>Welcome! This is where I’ll share:</p>
+<p>Welcome! Posts here are organised into four topics:</p>
 <ul>
-<li><strong>Educational content</strong> — research methods, statistics, and how-to guides</li>
-<li><strong>Research project opportunities</strong> — open projects you can join (see <a href="../../opportunities.html">Research Opportunities</a>)</li>
-<li><strong>Data science posts &amp; news</strong> — tutorials in R and Python, and updates worth knowing</li>
+<li><strong>Clinical Research</strong> — research methods, systematic reviews and meta-analysis, and how-to guides</li>
+<li><strong>Data Science</strong> — statistics and tutorials in R and Python</li>
+<li><strong>AI</strong> — artificial intelligence in medicine and research, and tools worth knowing</li>
+<li><strong>Bioinformatics</strong> — analysing biological and omics data</li>
 </ul>
+<p>I also post open research projects you can join — see <a href="../../opportunities.html">Research Opportunities</a>.</p>
 <p>Want to be notified about new posts? <a href="../../subscribe.html">Subscribe for free</a>.</p>
 
 
 
  ]]></description>
-  <category>news</category>
+  <category>Clinical Research</category>
+  <category>Data Science</category>
+  <category>AI</category>
+  <category>Bioinformatics</category>
   <guid>https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/</guid>
   <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate>
   <media:content url="https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/thumbnail.jpg" medium="image" type="image/jpeg"/>

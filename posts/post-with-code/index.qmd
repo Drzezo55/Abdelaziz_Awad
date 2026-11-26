@@ -2,7 +2,7 @@
 title: "Example post: summarizing data in R"
 author: "Abdelaziz Awad"
 date: "2026-11-25"
-categories: [data science, R, tutorial]
+categories: [Data Science]
 image: image.jpg
 draft: true   # drafts are hidden from the live site — delete this line to publish
 ---
