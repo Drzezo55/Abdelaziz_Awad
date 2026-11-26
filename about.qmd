@@ -25,9 +25,6 @@ data analysis and visualization. I am proficient in Unix-based environments,
 R, Python and C++, with experience in version control and in building
 reproducible, automated workflows.
 
-I have co-authored more than 60 publications, most of them systematic reviews
-and meta-analyses, and I enjoy turning complex data into clear evidence.
-
 ## What I share here
 
 This site is where I share science and write practical, step-by-step tutorials on:
@@ -45,7 +42,8 @@ I also post **Research Opportunities**: open projects you can join as a collabor
 |---|---|
 | Programming | R, Python, C++ |
 | Environment | Unix / Linux, command line |
-| Workflow | Git & GitHub, reproducible and automated pipelines |
+| Workflow | Snakemake, Nextflow, Git & GitHub, reproducible and automated pipelines |
+| Containers | Docker |
 | Analysis | Statistics, meta-analysis, data visualization |
 
 ## Publications
