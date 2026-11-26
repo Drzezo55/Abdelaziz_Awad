@@ -28,34 +28,6 @@
     "text": "💼 On LinkedIn\nNew posts are also shared on LinkedIn."
   },
   {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome to my website",
-    "section": "",
-    "text": "Welcome! This is where I’ll share:\n\nEducational content — research methods, statistics, and how-to guides\nResearch project opportunities — open projects you can join (see Research Opportunities)\nData science posts & news — tutorials in R and Python, and updates worth knowing\n\nWant to be notified about new posts? Subscribe for free."
-  },
-  {
-    "objectID": "opportunities.html",
-    "href": "opportunities.html",
-    "title": "Research Opportunities",
-    "section": "",
-    "text": "Want to join a research project? Below are the projects currently open. Each one lists what’s needed and how to apply."
-  },
-  {
-    "objectID": "opportunities.html#example-project-systematic-review-meta-analysis",
-    "href": "opportunities.html#example-project-systematic-review-meta-analysis",
-    "title": "Research Opportunities",
-    "section": "Example project: Systematic review & meta-analysis",
-    "text": "Example project: Systematic review & meta-analysis\nStatus: 🟢 Open · Deadline: 2026-12-31 · Spots: 4\nAbout the project: A short description of the research question and what the team will do.\nRoles needed:\n\nLiterature screening (title/abstract and full text)\nData extraction\nRisk-of-bias assessment\n\nRequirements: Medical student or graduate, basic English writing, ~5 hours/week.\nAuthorship: Contributors who complete their tasks are included as co-authors.\nApply now"
-  },
-  {
-    "objectID": "opportunities.html#example-project-retrospective-data-analysis-in-r",
-    "href": "opportunities.html#example-project-retrospective-data-analysis-in-r",
-    "title": "Research Opportunities",
-    "section": "Example project: Retrospective data analysis in R",
-    "text": "Example project: Retrospective data analysis in R\nStatus: 🔴 Closed\nAbout the project: A short description."
-  },
-  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "Abdelaziz Awad",
@@ -70,18 +42,18 @@
     "text": "Interests\n\nClinical research & evidence synthesis\nStatistics and data science (R, Python)\nTeaching research skills"
   },
   {
+    "objectID": "about.html#publications",
+    "href": "about.html#publications",
+    "title": "Abdelaziz Awad",
+    "section": "Publications",
+    "text": "Publications\nSee my Publications page or my Google Scholar profile."
+  },
+  {
     "objectID": "about.html#get-in-touch",
     "href": "about.html#get-in-touch",
     "title": "Abdelaziz Awad",
     "section": "Get in touch",
     "text": "Get in touch\nInterested in collaborating on a research project? See the Research Opportunities page."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Posts",
-    "section": "",
-    "text": "Welcome to my website\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 26, 2026\n\n\nAbdelaziz Awad\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "resources.html",
@@ -117,5 +89,61 @@
     "title": "Resources",
     "section": "Tools",
     "text": "Tools\n\nZotero — free reference manager\nRayyan — screening for systematic reviews"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome to my website",
+    "section": "",
+    "text": "Welcome! This is where I’ll share:\n\nEducational content — research methods, statistics, and how-to guides\nResearch project opportunities — open projects you can join (see Research Opportunities)\nData science posts & news — tutorials in R and Python, and updates worth knowing\n\nWant to be notified about new posts? Subscribe for free."
+  },
+  {
+    "objectID": "opportunities.html",
+    "href": "opportunities.html",
+    "title": "Research Opportunities",
+    "section": "",
+    "text": "Want to join a research project? Below are the projects currently open. Each one lists what’s needed and how to apply."
+  },
+  {
+    "objectID": "opportunities.html#example-project-systematic-review-meta-analysis",
+    "href": "opportunities.html#example-project-systematic-review-meta-analysis",
+    "title": "Research Opportunities",
+    "section": "Example project: Systematic review & meta-analysis",
+    "text": "Example project: Systematic review & meta-analysis\nStatus: 🟢 Open · Deadline: 2026-12-31 · Spots: 4\nAbout the project: A short description of the research question and what the team will do.\nRoles needed:\n\nLiterature screening (title/abstract and full text)\nData extraction\nRisk-of-bias assessment\n\nRequirements: Medical student or graduate, basic English writing, ~5 hours/week.\nAuthorship: Contributors who complete their tasks are included as co-authors.\nApply now"
+  },
+  {
+    "objectID": "opportunities.html#example-project-retrospective-data-analysis-in-r",
+    "href": "opportunities.html#example-project-retrospective-data-analysis-in-r",
+    "title": "Research Opportunities",
+    "section": "Example project: Retrospective data analysis in R",
+    "text": "Example project: Retrospective data analysis in R\nStatus: 🔴 Closed\nAbout the project: A short description."
+  },
+  {
+    "objectID": "publications.html",
+    "href": "publications.html",
+    "title": "Publications",
+    "section": "",
+    "text": "The full, always up-to-date list (with citation counts) is on my Google Scholar profile"
+  },
+  {
+    "objectID": "publications.html#section",
+    "href": "publications.html#section",
+    "title": "Publications",
+    "section": "2026",
+    "text": "2026\n\nAwad A, Coauthor B, Coauthor C (2026). Title of the paper. Journal Name. DOI"
+  },
+  {
+    "objectID": "publications.html#section-1",
+    "href": "publications.html#section-1",
+    "title": "Publications",
+    "section": "2025",
+    "text": "2025\n\nCoauthor A, Awad A (2025). Title of the paper. Journal Name. DOI"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Posts",
+    "section": "",
+    "text": "Welcome to my website\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nNov 26, 2026\n\n\nAbdelaziz Awad\n\n\n\n\n\nNo matching items"
   }
 ]

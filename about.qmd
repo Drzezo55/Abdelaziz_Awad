@@ -8,6 +8,9 @@ about:
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/
+    - icon: mortarboard-fill
+      text: Google Scholar
+      href: https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID
     - icon: github
       text: GitHub
       href: https://github.com/Drzezo55
@@ -16,7 +19,7 @@ about:
       href: mailto:you@example.com
 ---
 
-<!-- TODO: update the LinkedIn and email links above -->
+<!-- TODO: update the LinkedIn, Google Scholar and email links above -->
 
 Hi! I'm Abdelaziz. I share educational content, open research project opportunities,
 and posts about data science and statistics.
@@ -26,6 +29,11 @@ and posts about data science and statistics.
 - Clinical research & evidence synthesis
 - Statistics and data science (R, Python)
 - Teaching research skills
+
+## Publications
+
+See my [Publications](publications.qmd) page or my
+[Google Scholar profile](https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID).
 
 ## Get in touch
 

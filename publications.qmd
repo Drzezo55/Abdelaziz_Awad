@@ -1,0 +1,24 @@
+---
+title: "Publications"
+subtitle: "Peer-reviewed articles and conference work"
+toc: false
+---
+
+::: {.callout-note appearance="simple"}
+The full, always up-to-date list (with citation counts) is on my
+[Google Scholar profile](https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID){.btn .btn-primary .btn-sm}
+:::
+
+<!--
+TO ADD A PAPER: copy one line below and edit it. Newest first.
+Format: Authors (Year). Title. *Journal*. [DOI](https://doi.org/...)
+Put your own name in **bold**.
+-->
+
+## 2026
+
+1. **Awad A**, Coauthor B, Coauthor C (2026). Title of the paper. *Journal Name*. [DOI](https://doi.org/10.xxxx/xxxxx)
+
+## 2025
+
+1. Coauthor A, **Awad A** (2025). Title of the paper. *Journal Name*. [DOI](https://doi.org/10.xxxx/xxxxx)
