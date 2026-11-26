@@ -8,11 +8,12 @@
 #
 # Lines starting with # are notes — you can delete them.
 # This folder starts with "_" so it is never published.
+# For a research project, use posts/_template-opportunity/index.qmd instead.
 
 title: "Your post title"
 author: "Abdelaziz Awad"
 date: "2026-12-01"          # YYYY-MM-DD
-categories: [Clinical Research]   # any of: Clinical Research, Data Science, AI, Bioinformatics
+categories: [Clinical Research]   # any of: Clinical Research, Data Science, AI, Bioinformatics, Research Opportunities
 description: "One sentence that appears in the post list."
 # image: cover.jpg          # optional: upload cover.jpg into the same folder, then remove the #
 # draft: true               # optional: keeps the post hidden until you delete this line

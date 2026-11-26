@@ -1,6 +1,9 @@
 ---
 title: "Posts"
-subtitle: "Clinical research · Data science · AI · Bioinformatics"
+aliases:
+  - opportunities.html
+  - resources.html
+subtitle: "Clinical research · Data science · AI · Bioinformatics · Research opportunities"
 listing:
   contents: posts
   feed: true
