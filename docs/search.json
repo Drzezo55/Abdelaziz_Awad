@@ -1,5 +1,33 @@
 [
   {
+    "objectID": "subscribe.html",
+    "href": "subscribe.html",
+    "title": "Subscribe",
+    "section": "",
+    "text": "Email subscription form coming soon."
+  },
+  {
+    "objectID": "subscribe.html#by-email",
+    "href": "subscribe.html#by-email",
+    "title": "Subscribe",
+    "section": "",
+    "text": "Email subscription form coming soon."
+  },
+  {
+    "objectID": "subscribe.html#by-rss",
+    "href": "subscribe.html#by-rss",
+    "title": "Subscribe",
+    "section": "📡 By RSS",
+    "text": "📡 By RSS\nUse any feed reader (Feedly, Inoreader, …) and add this link:\nindex.xml"
+  },
+  {
+    "objectID": "subscribe.html#on-linkedin",
+    "href": "subscribe.html#on-linkedin",
+    "title": "Subscribe",
+    "section": "💼 On LinkedIn",
+    "text": "💼 On LinkedIn\nNew posts are also shared on LinkedIn."
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "Abdelaziz Awad",
@@ -35,6 +63,13 @@
     "text": "Get in touch\nWant to collaborate, or have an idea for a tutorial? Email me or connect on LinkedIn. Open projects are listed under Research Opportunities."
   },
   {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome to my website",
+    "section": "",
+    "text": "Welcome! Posts here are organised into four topics:\n\nClinical Research — research methods, systematic reviews and meta-analysis, and how-to guides\nData Science — statistics and tutorials in R and Python\nAI — artificial intelligence in medicine and research, and tools worth knowing\nBioinformatics — analysing biological and omics data\n\nI also post Research Opportunities: open research projects you can join. Find them under Posts → Research Opportunities.\nWant to be notified about new posts? Subscribe for free."
+  },
+  {
     "objectID": "publications.html",
     "href": "publications.html",
     "title": "Publications",
@@ -61,41 +96,6 @@
     "title": "Publications",
     "section": "2024",
     "text": "2024\n\nAwad, AA., Itumalla, R., Gaidhane, AM., Khatib, MN., Ballal, S., Bansal, P., & … (2024). Association of electronic cigarette use and suicidal behaviors: a systematic review and meta-analysis. BMC psychiatry. 24 (1), 608\nAwad, AA., Khatib, MN., Gaidhane, AM., Ballal, S., Bansal, P., Srivastava, M., & … (2024). Predictors of acute kidney injury in dengue patients: a systematic review and meta-analysis. Virology Journal. 21 (1), 223\nSerag, I., Abdelhady, M., Awad, AA., Wageeh, A., Shaboub, A., Elhalag, RH., & … (2024). Postoperative elevated bed header position versus supine in the management of chronic subdural hematoma: a systematic review and meta-analysis. Acta Neurologica Belgica. 124 (4), 1177-1187\nMarey, MM., Belal, M., Awad, AA., Rabea, EM., Hassan, MA., Abbas, AW., & … (2024). Efficacy and safety of aldafermin in non-alcoholic steatohepatitis: A systematic review and meta-analysis of randomized controlled trials. Clinics and Research in Hepatology and Gastroenterology. 48 (6), 102357\nAwad, AA., Alkorbi, HA., & Serhan, HA. (2024). Charles Kelman: The father of phacoemulsification. Cureus. 16 (6)\nAwad, AA., Aboelkhier, MM., Mohamed, RG., Abbas, AW., Hageen, AW., & … (2024). Efficacy and safety of ontamalimab in treating inflammatory bowel disease: a systematic review and meta-analysis of randomized controlled trials. Current Pharmacology Reports. 10 (6), 467-484\nAwad, AA., Alkorbi, HA., & Serhan, HA. (2024). Allvar Gullstrand: the only ophthalmologist who won the nobel prize. Cureus. 16 (6)\nAlkorbi, HA., Awad, AA., Hassan, AK., Emoush, LA., Anter, AM., Shraim, BA., & … (2024). Ocular complications of facial fillers and botulinum injections: A comprehensive systematic review. Saudi Ophthalmology (SO) Scientific Meeting. 2024 │The Red Sea\nHazem, A., Awad, AA., Sharaf, MS., Mahmoud, MM., Hassan, MA., Mahmoud, N., & … (2024). S1546 Efficacy and Safety of Endoscopic Submucosal Dissection With Traction-Assisted Method in Comparison to Conventional Method: A Systematic Review and Meta-Analysis. The American Journal of Gastroenterology. 119 (10S), S1121-S1122\nAbosheaishaa, H., Awad, AA., Sharaf, MS., Marey, MM., Hassan, MA., Nassar, M., & … (2024). Efficacy and Safety of Endoscopic Submucosal Dissection With Traction-Assisted Method in Comparison to Conventional Method: A Systematic Review and Meta-Analysis. AMERICAN JOURNAL OF GASTROENTEROLOGY. 119 (10 S), S1121-S1122\nAbosheaishaa, H., Awad, AA., Sharaf, MS., Marey, MM., Hassan, MA., Nassar, M., & … (2024). S1546 Efficacy and Safety of Endoscopic Submucosal Dissection With Traction-Assisted Method in Comparison to Conventional Method: A Systematic Review and Meta-Analysis. Official journal of the American College of Gastroenterology| ACG. 119 (10S …"
-  },
-  {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome to my website",
-    "section": "",
-    "text": "Welcome! Posts here are organised into four topics:\n\nClinical Research — research methods, systematic reviews and meta-analysis, and how-to guides\nData Science — statistics and tutorials in R and Python\nAI — artificial intelligence in medicine and research, and tools worth knowing\nBioinformatics — analysing biological and omics data\n\nI also post Research Opportunities: open research projects you can join. Find them under Posts → Research Opportunities.\nWant to be notified about new posts? Subscribe for free."
-  },
-  {
-    "objectID": "subscribe.html",
-    "href": "subscribe.html",
-    "title": "Subscribe",
-    "section": "",
-    "text": "Email subscription form coming soon."
-  },
-  {
-    "objectID": "subscribe.html#by-email",
-    "href": "subscribe.html#by-email",
-    "title": "Subscribe",
-    "section": "",
-    "text": "Email subscription form coming soon."
-  },
-  {
-    "objectID": "subscribe.html#by-rss",
-    "href": "subscribe.html#by-rss",
-    "title": "Subscribe",
-    "section": "📡 By RSS",
-    "text": "📡 By RSS\nUse any feed reader (Feedly, Inoreader, …) and add this link:\nindex.xml"
-  },
-  {
-    "objectID": "subscribe.html#on-linkedin",
-    "href": "subscribe.html#on-linkedin",
-    "title": "Subscribe",
-    "section": "💼 On LinkedIn",
-    "text": "💼 On LinkedIn\nNew posts are also shared on LinkedIn."
   },
   {
     "objectID": "index.html",
