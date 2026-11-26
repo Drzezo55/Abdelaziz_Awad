@@ -1,5 +1,75 @@
 [
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Posts",
+    "section": "",
+    "text": "Welcome to my website\n\n\n\nClinical Research\n\nData Science\n\nAI\n\nBioinformatics\n\n\n\nWhat this site covers: clinical research, data science, AI, bioinformatics, and open research projects you can join.\n\n\n\n\n\nNov 26, 2026\n\n\nAbdelaziz Awad\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "opportunities.html",
+    "href": "opportunities.html",
+    "title": "Research Opportunities",
+    "section": "",
+    "text": "Want to join a research project? Below are the projects currently open. Each one lists what’s needed and how to apply."
+  },
+  {
+    "objectID": "opportunities.html#example-project-systematic-review-meta-analysis",
+    "href": "opportunities.html#example-project-systematic-review-meta-analysis",
+    "title": "Research Opportunities",
+    "section": "Example project: Systematic review & meta-analysis",
+    "text": "Example project: Systematic review & meta-analysis\nStatus: 🟢 Open · Deadline: 2026-12-31 · Spots: 4\nAbout the project: A short description of the research question and what the team will do.\nRoles needed:\n\nLiterature screening (title/abstract and full text)\nData extraction\nRisk-of-bias assessment\n\nRequirements: Medical student or graduate, basic English writing, ~5 hours/week.\nAuthorship: Contributors who complete their tasks are included as co-authors.\nApply now"
+  },
+  {
+    "objectID": "opportunities.html#example-project-retrospective-data-analysis-in-r",
+    "href": "opportunities.html#example-project-retrospective-data-analysis-in-r",
+    "title": "Research Opportunities",
+    "section": "Example project: Retrospective data analysis in R",
+    "text": "Example project: Retrospective data analysis in R\nStatus: 🔴 Closed\nAbout the project: A short description."
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome to my website",
+    "section": "",
+    "text": "Welcome! Posts here are organised into four topics:\n\nClinical Research — research methods, systematic reviews and meta-analysis, and how-to guides\nData Science — statistics and tutorials in R and Python\nAI — artificial intelligence in medicine and research, and tools worth knowing\nBioinformatics — analysing biological and omics data\n\nI also post open research projects you can join — see Research Opportunities.\nWant to be notified about new posts? Subscribe for free."
+  },
+  {
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Resources",
+    "section": "",
+    "text": "R for Data Science (free book)\nDoing Meta-Analysis in R (free book)"
+  },
+  {
+    "objectID": "resources.html#learning-r-statistics",
+    "href": "resources.html#learning-r-statistics",
+    "title": "Resources",
+    "section": "",
+    "text": "R for Data Science (free book)\nDoing Meta-Analysis in R (free book)"
+  },
+  {
+    "objectID": "resources.html#python-data-science",
+    "href": "resources.html#python-data-science",
+    "title": "Resources",
+    "section": "Python & data science",
+    "text": "Python & data science\n\nPython Data Science Handbook (free book)"
+  },
+  {
+    "objectID": "resources.html#research-methods",
+    "href": "resources.html#research-methods",
+    "title": "Resources",
+    "section": "Research methods",
+    "text": "Research methods\n\nCochrane Handbook for Systematic Reviews\nPRISMA 2020 statement"
+  },
+  {
+    "objectID": "resources.html#tools",
+    "href": "resources.html#tools",
+    "title": "Resources",
+    "section": "Tools",
+    "text": "Tools\n\nZotero — free reference manager\nRayyan — screening for systematic reviews"
+  },
+  {
     "objectID": "subscribe.html",
     "href": "subscribe.html",
     "title": "Subscribe",
@@ -56,69 +126,6 @@
     "text": "Get in touch\nInterested in collaborating on a research project? See the Research Opportunities page."
   },
   {
-    "objectID": "resources.html",
-    "href": "resources.html",
-    "title": "Resources",
-    "section": "",
-    "text": "R for Data Science (free book)\nDoing Meta-Analysis in R (free book)"
-  },
-  {
-    "objectID": "resources.html#learning-r-statistics",
-    "href": "resources.html#learning-r-statistics",
-    "title": "Resources",
-    "section": "",
-    "text": "R for Data Science (free book)\nDoing Meta-Analysis in R (free book)"
-  },
-  {
-    "objectID": "resources.html#python-data-science",
-    "href": "resources.html#python-data-science",
-    "title": "Resources",
-    "section": "Python & data science",
-    "text": "Python & data science\n\nPython Data Science Handbook (free book)"
-  },
-  {
-    "objectID": "resources.html#research-methods",
-    "href": "resources.html#research-methods",
-    "title": "Resources",
-    "section": "Research methods",
-    "text": "Research methods\n\nCochrane Handbook for Systematic Reviews\nPRISMA 2020 statement"
-  },
-  {
-    "objectID": "resources.html#tools",
-    "href": "resources.html#tools",
-    "title": "Resources",
-    "section": "Tools",
-    "text": "Tools\n\nZotero — free reference manager\nRayyan — screening for systematic reviews"
-  },
-  {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome to my website",
-    "section": "",
-    "text": "Welcome! Posts here are organised into four topics:\n\nClinical Research — research methods, systematic reviews and meta-analysis, and how-to guides\nData Science — statistics and tutorials in R and Python\nAI — artificial intelligence in medicine and research, and tools worth knowing\nBioinformatics — analysing biological and omics data\n\nI also post open research projects you can join — see Research Opportunities.\nWant to be notified about new posts? Subscribe for free."
-  },
-  {
-    "objectID": "opportunities.html",
-    "href": "opportunities.html",
-    "title": "Research Opportunities",
-    "section": "",
-    "text": "Want to join a research project? Below are the projects currently open. Each one lists what’s needed and how to apply."
-  },
-  {
-    "objectID": "opportunities.html#example-project-systematic-review-meta-analysis",
-    "href": "opportunities.html#example-project-systematic-review-meta-analysis",
-    "title": "Research Opportunities",
-    "section": "Example project: Systematic review & meta-analysis",
-    "text": "Example project: Systematic review & meta-analysis\nStatus: 🟢 Open · Deadline: 2026-12-31 · Spots: 4\nAbout the project: A short description of the research question and what the team will do.\nRoles needed:\n\nLiterature screening (title/abstract and full text)\nData extraction\nRisk-of-bias assessment\n\nRequirements: Medical student or graduate, basic English writing, ~5 hours/week.\nAuthorship: Contributors who complete their tasks are included as co-authors.\nApply now"
-  },
-  {
-    "objectID": "opportunities.html#example-project-retrospective-data-analysis-in-r",
-    "href": "opportunities.html#example-project-retrospective-data-analysis-in-r",
-    "title": "Research Opportunities",
-    "section": "Example project: Retrospective data analysis in R",
-    "text": "Example project: Retrospective data analysis in R\nStatus: 🔴 Closed\nAbout the project: A short description."
-  },
-  {
     "objectID": "publications.html",
     "href": "publications.html",
     "title": "Publications",
@@ -145,12 +152,5 @@
     "title": "Publications",
     "section": "2024",
     "text": "2024\n\nAwad, AA., Itumalla, R., Gaidhane, AM., Khatib, MN., Ballal, S., Bansal, P., & … (2024). Association of electronic cigarette use and suicidal behaviors: a systematic review and meta-analysis. BMC psychiatry. 24 (1), 608\nAwad, AA., Khatib, MN., Gaidhane, AM., Ballal, S., Bansal, P., Srivastava, M., & … (2024). Predictors of acute kidney injury in dengue patients: a systematic review and meta-analysis. Virology Journal. 21 (1), 223\nSerag, I., Abdelhady, M., Awad, AA., Wageeh, A., Shaboub, A., Elhalag, RH., & … (2024). Postoperative elevated bed header position versus supine in the management of chronic subdural hematoma: a systematic review and meta-analysis. Acta Neurologica Belgica. 124 (4), 1177-1187\nMarey, MM., Belal, M., Awad, AA., Rabea, EM., Hassan, MA., Abbas, AW., & … (2024). Efficacy and safety of aldafermin in non-alcoholic steatohepatitis: A systematic review and meta-analysis of randomized controlled trials. Clinics and Research in Hepatology and Gastroenterology. 48 (6), 102357\nAwad, AA., Alkorbi, HA., & Serhan, HA. (2024). Charles Kelman: The father of phacoemulsification. Cureus. 16 (6)\nAwad, AA., Aboelkhier, MM., Mohamed, RG., Abbas, AW., Hageen, AW., & … (2024). Efficacy and safety of ontamalimab in treating inflammatory bowel disease: a systematic review and meta-analysis of randomized controlled trials. Current Pharmacology Reports. 10 (6), 467-484\nAwad, AA., Alkorbi, HA., & Serhan, HA. (2024). Allvar Gullstrand: the only ophthalmologist who won the nobel prize. Cureus. 16 (6)\nAlkorbi, HA., Awad, AA., Hassan, AK., Emoush, LA., Anter, AM., Shraim, BA., & … (2024). Ocular complications of facial fillers and botulinum injections: A comprehensive systematic review. Saudi Ophthalmology (SO) Scientific Meeting. 2024 │The Red Sea\nHazem, A., Awad, AA., Sharaf, MS., Mahmoud, MM., Hassan, MA., Mahmoud, N., & … (2024). S1546 Efficacy and Safety of Endoscopic Submucosal Dissection With Traction-Assisted Method in Comparison to Conventional Method: A Systematic Review and Meta-Analysis. The American Journal of Gastroenterology. 119 (10S), S1121-S1122\nAbosheaishaa, H., Awad, AA., Sharaf, MS., Marey, MM., Hassan, MA., Nassar, M., & … (2024). Efficacy and Safety of Endoscopic Submucosal Dissection With Traction-Assisted Method in Comparison to Conventional Method: A Systematic Review and Meta-Analysis. AMERICAN JOURNAL OF GASTROENTEROLOGY. 119 (10 S), S1121-S1122\nAbosheaishaa, H., Awad, AA., Sharaf, MS., Marey, MM., Hassan, MA., Nassar, M., & … (2024). S1546 Efficacy and Safety of Endoscopic Submucosal Dissection With Traction-Assisted Method in Comparison to Conventional Method: A Systematic Review and Meta-Analysis. Official journal of the American College of Gastroenterology| ACG. 119 (10S …"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Posts",
-    "section": "",
-    "text": "Welcome to my website\n\n\n\nClinical Research\n\nData Science\n\nAI\n\nBioinformatics\n\n\n\nWhat this site covers: clinical research, data science, AI, bioinformatics, and open research projects you can join.\n\n\n\n\n\nNov 26, 2026\n\n\nAbdelaziz Awad\n\n\n\n\n\nNo matching items"
   }
 ]
