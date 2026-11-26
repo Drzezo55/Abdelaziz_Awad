@@ -46,7 +46,7 @@ I also post **Research Opportunities**: open projects you can join as a collabor
 | Environment | Unix / Linux, command line |
 | Workflow | Snakemake, Nextflow, Git & GitHub, reproducible and automated pipelines |
 | Containers | Docker |
-| Machine learning | Machine learning & deep learning in real-world projects, model deployment (MLOps) |
+| Machine learning | PyTorch, scikit-learn, MLflow, FastAPI; machine learning & deep learning in real-world projects, model deployment (MLOps) |
 | Analysis | Statistics, meta-analysis, data visualization |
 
 ## Publications
