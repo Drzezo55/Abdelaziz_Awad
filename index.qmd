@@ -1,0 +1,15 @@
+---
+title: "Posts"
+subtitle: "Tutorials, research tips, and data science news"
+listing:
+  contents: posts
+  feed: true
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: true
+page-layout: full
+title-block-banner: true
+toc: false
+---

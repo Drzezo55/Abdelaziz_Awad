@@ -1,0 +1,23 @@
+---
+title: "Resources"
+subtitle: "Free courses, tools, and templates I recommend"
+---
+
+## Learning R & statistics
+
+- [R for Data Science (free book)](https://r4ds.hadley.nz/)
+- [Doing Meta-Analysis in R (free book)](https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/)
+
+## Python & data science
+
+- [Python Data Science Handbook (free book)](https://jakevdp.github.io/PythonDataScienceHandbook/)
+
+## Research methods
+
+- [Cochrane Handbook for Systematic Reviews](https://training.cochrane.org/handbook)
+- [PRISMA 2020 statement](https://www.prisma-statement.org/)
+
+## Tools
+
+- [Zotero](https://www.zotero.org/) — free reference manager
+- [Rayyan](https://www.rayyan.ai/) — screening for systematic reviews

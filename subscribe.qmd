@@ -1,0 +1,29 @@
+---
+title: "Subscribe"
+subtitle: "Follow for free — get new posts and research opportunities"
+toc: false
+---
+
+## 📧 By email
+
+<!--
+TODO: create a free account at https://follow.it , add your site's RSS feed
+(https://drzezo55.github.io/Abdelaziz_Awad/index.xml), copy the "subscription form" HTML
+it gives you, and paste it between the two lines below (replacing the placeholder).
+-->
+
+```{=html}
+<div class="subscribe-placeholder">
+  Email subscription form coming soon.
+</div>
+```
+
+## 📡 By RSS
+
+Use any feed reader (Feedly, Inoreader, …) and add this link:
+
+[index.xml](index.xml)
+
+## 💼 On LinkedIn
+
+New posts are also shared on [LinkedIn](https://www.linkedin.com/).

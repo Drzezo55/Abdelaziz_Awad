@@ -1,0 +1,43 @@
+project:
+  type: website
+  output-dir: docs          # GitHub Pages serves the site from this folder
+  resources:
+    - .nojekyll
+
+website:
+  title: "Abdelaziz Awad"
+  description: "Educational content, research project opportunities, and data science posts."
+  site-url: https://drzezo55.github.io/Abdelaziz_Awad
+  favicon: profile.jpg
+  search: true
+  open-graph: true          # nice previews when links are shared on LinkedIn/WhatsApp
+  navbar:
+    left:
+      - text: "Posts"
+        href: index.qmd
+      - text: "Research Opportunities"
+        href: opportunities.qmd
+      - text: "Resources"
+        href: resources.qmd
+      - text: "About"
+        href: about.qmd
+    right:
+      - text: "Subscribe"
+        href: subscribe.qmd
+      - icon: rss
+        href: index.xml
+      - icon: linkedin
+        href: https://www.linkedin.com/
+      - icon: github
+        href: https://github.com/Drzezo55
+  page-footer:
+    left: "© 2026 Abdelaziz Awad"
+    right: "Built with [Quarto](https://quarto.org)"
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly          # adds a light/dark toggle
+    css: styles.css
+    toc: true

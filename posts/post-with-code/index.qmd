@@ -1,0 +1,19 @@
+---
+title: "Example post: summarizing data in R"
+author: "Abdelaziz Awad"
+date: "2026-11-25"
+categories: [data science, R, tutorial]
+image: image.jpg
+draft: true   # drafts are hidden from the live site — delete this line to publish
+---
+
+This is an example of a data science post. Code blocks look like this:
+
+```r
+# mean and SD of a variable
+data <- c(12, 15, 9, 20, 17)
+mean(data)
+sd(data)
+```
+
+You can also write math: $\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$

@@ -1,0 +1,8 @@
+/* css styles */
+.subscribe-placeholder {
+  padding: 1.25rem;
+  border: 1px dashed #adb5bd;
+  border-radius: 8px;
+  text-align: center;
+  opacity: 0.8;
+}

@@ -1,0 +1,15 @@
+---
+title: "Welcome to my website"
+author: "Abdelaziz Awad"
+date: "2026-11-26"
+categories: [news]
+image: thumbnail.jpg
+---
+
+Welcome! This is where I'll share:
+
+- **Educational content** — research methods, statistics, and how-to guides
+- **Research project opportunities** — open projects you can join (see [Research Opportunities](../../opportunities.qmd))
+- **Data science posts & news** — tutorials in R and Python, and updates worth knowing
+
+Want to be notified about new posts? [Subscribe for free](../../subscribe.qmd).
