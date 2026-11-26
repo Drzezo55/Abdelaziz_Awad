@@ -12,37 +12,6 @@
 <generator>quarto-1.8.25</generator>
 <lastBuildDate>Thu, 26 Nov 2026 00:00:00 GMT</lastBuildDate>
 <item>
-  <title>Welcome to my website</title>
-  <dc:creator>Abdelaziz Awad</dc:creator>
-  <link>https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>Welcome! Posts here are organised into four topics:</p>
-<ul>
-<li><strong>Clinical Research</strong> — research methods, systematic reviews and meta-analysis, and how-to guides</li>
-<li><strong>Data Science</strong> — statistics and tutorials in R and Python</li>
-<li><strong>AI</strong> — artificial intelligence in medicine and research, and tools worth knowing</li>
-<li><strong>Bioinformatics</strong> — analysing biological and omics data</li>
-</ul>
-<p>I also post <strong>Research Opportunities</strong>: open research projects you can join. Find them under <em>Posts → Research Opportunities</em>.</p>
-<p>Want to be notified about new posts? <a href="../../subscribe.html">Subscribe for free</a>.</p>
-
-
-
- ]]></description>
-  <category>Clinical Research</category>
-  <category>Data Science</category>
-  <category>AI</category>
-  <category>Bioinformatics</category>
-  <category>Research Opportunities</category>
-  <guid>https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/</guid>
-  <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate>
-  <media:content url="https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/thumbnail.jpg" medium="image" type="image/jpeg"/>
-</item>
-<item>
   <title>Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA</title>
   <dc:creator>Abdelaziz Awad</dc:creator>
   <link>https://drzezo55.github.io/Abdelaziz_Awad/posts/meta-analysis-in-r/</link>
@@ -429,14 +398,24 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <div id="qwebr-insertion-location-6"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
+<section id="leave-one-out-sensitivity-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="leave-one-out-sensitivity-analysis">Leave-one-out sensitivity analysis</h3>
+<p>Is the result driven by a single trial? <strong>Leave-one-out analysis</strong> re-runs the meta-analysis 13 times, leaving out one study each time:</p>
+<div id="qwebr-insertion-location-7"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Plot the 13 re-pooled estimates. The orange dashed line is the result with all studies:</p>
+<div id="qwebr-insertion-location-8"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>The pooled RR stays between <strong>0.45</strong> (omitting TPT Madras 1980) and <strong>0.53</strong> (omitting Hart &amp; Sutherland 1977), and every confidence interval stays below 1. <strong>No single trial changes the conclusion</strong>, so the result is robust.</p>
+</section>
 </section>
 <section id="a4.-subgroup-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="a4.-subgroup-analysis">A4. Subgroup analysis</h2>
 <p>Does the effect differ by <strong>allocation method</strong> (random, alternate, systematic)? First, pool the studies within each subgroup separately:</p>
-<div id="qwebr-insertion-location-7"></div>
+<div id="qwebr-insertion-location-9"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Then test whether the subgroups <strong>differ from each other</strong>. Adding <code>alloc</code> as a moderator gives the test for subgroup differences (the <code>QM</code> statistic):</p>
-<div id="qwebr-insertion-location-8"></div>
+<div id="qwebr-insertion-location-10"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>The test of moderators gives <strong>QM ≈ 1.77, df = 2, p ≈ 0.41</strong>: no evidence that the effect differs by allocation method. The subgroup estimates look different, but the differences are compatible with chance.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -455,7 +434,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <section id="meta-regression-a-continuous-moderator" class="level3">
 <h3 class="anchored" data-anchor-id="meta-regression-a-continuous-moderator">Meta-regression: a continuous moderator</h3>
 <p>Subgroups split studies into categories. For a continuous characteristic such as <strong>latitude</strong>, use meta-regression:</p>
-<div id="qwebr-insertion-location-9"></div>
+<div id="qwebr-insertion-location-11"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Latitude is strongly associated with the effect (<strong>p &lt; 0.0001</strong>) and explains about <strong>76% of the heterogeneity</strong> (R²). The vaccine works better further from the equator.</p>
 </section>
@@ -463,14 +442,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <section id="a5.-publication-bias" class="level2">
 <h2 class="anchored" data-anchor-id="a5.-publication-bias">A5. Publication bias</h2>
 <p>Small studies with “negative” results are less likely to be published, which can make the pooled effect look too good. Start with a <strong>funnel plot</strong>: without bias, the studies should scatter symmetrically around the pooled estimate.</p>
-<div id="qwebr-insertion-location-10"></div>
+<p>We draw a <strong>contour-enhanced funnel plot</strong>: the coloured zones show where a study’s result would be statistically significant. If studies are missing mainly from the white (non-significant) zone, publication bias is a likely cause of asymmetry.</p>
+<div id="qwebr-insertion-location-12"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Then use formal tests:</p>
-<div id="qwebr-insertion-location-11"></div>
+<div id="qwebr-insertion-location-13"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Neither test suggests asymmetry (Egger p ≈ 0.42, Begg p ≈ 0.95).</p>
 <p><strong>Trim-and-fill</strong> estimates how many studies might be “missing” and adds them to see how the result would change:</p>
-<div id="qwebr-insertion-location-12"></div>
+<div id="qwebr-insertion-location-14"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>One study is imputed, and the adjusted RR (≈ 0.52) barely moves, so the conclusion holds.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
@@ -491,12 +471,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <h2 class="anchored" data-anchor-id="a6.-trial-sequential-analysis-tsa">A6. Trial sequential analysis (TSA)</h2>
 <p>A conventional meta-analysis can look “significant” just because it was tested repeatedly as trials accumulated, or because there isn’t yet enough information. <strong>TSA</strong> treats the meta-analysis like a sequential trial. It calculates the <strong>required information size</strong> (the number of participants needed for a reliable answer) and draws <strong>monitoring boundaries</strong> that the cumulative Z-curve must cross before you can call the result firm.</p>
 <p>We use the <a href="https://cran.r-project.org/package=RTSA"><code>RTSA</code></a> package. For binary outcomes it needs the columns <code>eI</code>, <code>nI</code> (intervention events, total) and <code>eC</code>, <code>nC</code> (control events, total), with trials in <strong>chronological order</strong>:</p>
-<div id="qwebr-insertion-location-13"></div>
+<div id="qwebr-insertion-location-15"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Now run the TSA. We assume a minimal clinically relevant effect of <strong>RR = 0.8</strong> (a 20% relative risk reduction), α = 5% (two-sided) and 80% power, with O’Brien-Fleming alpha-spending boundaries:</p>
-<div id="qwebr-insertion-location-14"></div>
+<div id="qwebr-insertion-location-16"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<div id="qwebr-insertion-location-15"></div>
+<div id="qwebr-insertion-location-17"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p><strong>How to read it:</strong></p>
 <ul>
@@ -539,7 +519,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>Papers often report the <strong>standard error (SE)</strong> or a <strong>95% CI</strong> instead of the SD. Convert them first: SD = SE × √n, or, for a 95% CI of a mean, SD = √n × (upper − lower) / 3.92. Entering an SE as an SD is one of the most common errors in meta-analysis.</p>
 </div>
 </div>
-<div id="qwebr-insertion-location-16"></div>
+<div id="qwebr-insertion-location-18"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
 <section id="b2.-calculate-effect-sizes-smd-or-md" class="level2">
@@ -549,15 +529,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <li>Use the <strong>standardized mean difference (SMD, Hedges’ g)</strong> when studies use different scales or instruments, or when the spread differs a lot between studies.</li>
 </ul>
 <p>Here, the trials measured days off over very different follow-up periods (look at the means: from under 1 day to over 30), so, like the original review, we use the <strong>SMD</strong>:</p>
-<div id="qwebr-insertion-location-17"></div>
+<div id="qwebr-insertion-location-19"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>A negative SMD means <strong>fewer days off</strong> in the education group. As a rough guide, an SMD of 0.2 is a small effect, 0.5 medium and 0.8 large.</p>
 </section>
 <section id="b3.-random-effects-meta-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="b3.-random-effects-meta-analysis">B3. Random-effects meta-analysis</h2>
-<div id="qwebr-insertion-location-18"></div>
+<div id="qwebr-insertion-location-20"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<div id="qwebr-insertion-location-19"></div>
+<div id="qwebr-insertion-location-21"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p><strong>How to read it:</strong></p>
 <ul>
@@ -565,30 +545,36 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <li><strong>I² ≈ 54%, Q-test p ≈ 0.008:</strong> moderate heterogeneity.</li>
 <li><strong>95% prediction interval ≈ −0.60 to 0.21:</strong> in a new setting, the effect could range from a moderate benefit to none.</li>
 </ul>
+<section id="leave-one-out-sensitivity-analysis-1" class="level3">
+<h3 class="anchored" data-anchor-id="leave-one-out-sensitivity-analysis-1">Leave-one-out sensitivity analysis</h3>
+<div id="qwebr-insertion-location-22"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>The pooled SMD ranges from <strong>−0.15</strong> (omitting Ghosh 1998) to <strong>−0.23</strong> (omitting Hilton 1986) and stays statistically significant whichever study is removed. Leaving out <strong>Ghosh 1998</strong> lowers I² from about 54% to 38%, so this trial contributes much of the heterogeneity. That’s worth checking in the original paper.</p>
+</section>
 </section>
 <section id="b4.-subgroup-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="b4.-subgroup-analysis">B4. Subgroup analysis</h2>
 <p>Is <strong>optimal</strong> self-management more effective than <strong>partial</strong> programs?</p>
-<div id="qwebr-insertion-location-20"></div>
+<div id="qwebr-insertion-location-23"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>The optimal programs show a small benefit (<strong>SMD ≈ −0.27, 95% CI −0.43 to −0.11</strong>), while the partial programs show none (<strong>SMD ≈ 0.01</strong>). The test for subgroup differences is borderline (<strong>QM ≈ 3.57, p ≈ 0.06</strong>), and the partial subgroup has only 4 trials, so this is a hypothesis to test in future trials, not a firm conclusion.</p>
 </section>
 <section id="b5.-publication-bias" class="level2">
 <h2 class="anchored" data-anchor-id="b5.-publication-bias">B5. Publication bias</h2>
-<div id="qwebr-insertion-location-21"></div>
+<div id="qwebr-insertion-location-24"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Neither Egger’s test (p ≈ 0.52) nor Begg’s test (p ≈ 0.37) is significant. But look at trim-and-fill:</p>
-<div id="qwebr-insertion-location-22"></div>
+<div id="qwebr-insertion-location-25"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Trim-and-fill imputes <strong>4 missing studies</strong> on the right (no benefit) side, and the adjusted SMD shrinks to <strong>≈ −0.07 (95% CI −0.24 to 0.10)</strong>, which is no longer significant. So the small benefit is <strong>sensitive to possible small-study effects</strong>, even though the formal tests were negative. This is worth reporting as a limitation.</p>
 </section>
 <section id="b6.-trial-sequential-analysis-tsa" class="level2">
 <h2 class="anchored" data-anchor-id="b6.-trial-sequential-analysis-tsa">B6. Trial sequential analysis (TSA)</h2>
 <p>For continuous outcomes, <code>RTSA</code> works on the <strong>mean difference in the original units</strong> (days). It needs <code>mI</code>, <code>sdI</code>, <code>nI</code> (intervention) and <code>mC</code>, <code>sdC</code>, <code>nC</code> (control), in chronological order:</p>
-<div id="qwebr-insertion-location-23"></div>
+<div id="qwebr-insertion-location-26"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>For a continuous TSA you need two assumptions: the <strong>minimal relevant difference</strong> (<code>mc</code>) and the expected <strong>SD</strong> of the outcome (<code>sd_mc</code>). Here we look for a reduction of <strong>1 day</strong> off work, with an SD of 8 days:</p>
-<div id="qwebr-insertion-location-24"></div>
+<div id="qwebr-insertion-location-27"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p><strong>How to read it:</strong></p>
 <ul>
@@ -662,18 +648,24 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <td>SMD −0.19 (−0.34 to −0.05), I² ≈ 54%</td>
 </tr>
 <tr class="even">
+<td>Leave-one-out</td>
+<td><code>leave1out()</code></td>
+<td>Robust: RR 0.45 to 0.53</td>
+<td>Robust: SMD −0.15 to −0.23</td>
+</tr>
+<tr class="odd">
 <td>Subgroups</td>
 <td><code>rma(mods = ~ group)</code></td>
 <td>No difference by allocation (p ≈ 0.41)</td>
 <td>Optimal vs partial, borderline (p ≈ 0.06)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Publication bias</td>
 <td><code>funnel()</code>, <code>regtest()</code>, <code>ranktest()</code>, <code>trimfill()</code></td>
 <td>No clear asymmetry; adjusted RR ≈ 0.52</td>
 <td>Tests negative, but trim-and-fill removes the effect</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>TSA</td>
 <td><code>RTSA()</code></td>
 <td>≈ 10% of required information; not conclusive</td>
@@ -713,6 +705,37 @@ font-style: inherit;">"RTSA"</span>))</span></code></pre></div></div>
   <guid>https://drzezo55.github.io/Abdelaziz_Awad/posts/meta-analysis-in-r/</guid>
   <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate>
   <media:content url="https://drzezo55.github.io/Abdelaziz_Awad/posts/meta-analysis-in-r/forest.png" medium="image" type="image/png" height="103" width="144"/>
+</item>
+<item>
+  <title>Welcome to my website</title>
+  <dc:creator>Abdelaziz Awad</dc:creator>
+  <link>https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Welcome! Posts here are organised into four topics:</p>
+<ul>
+<li><strong>Clinical Research</strong> — research methods, systematic reviews and meta-analysis, and how-to guides</li>
+<li><strong>Data Science</strong> — statistics and tutorials in R and Python</li>
+<li><strong>AI</strong> — artificial intelligence in medicine and research, and tools worth knowing</li>
+<li><strong>Bioinformatics</strong> — analysing biological and omics data</li>
+</ul>
+<p>I also post <strong>Research Opportunities</strong>: open research projects you can join. Find them under <em>Posts → Research Opportunities</em>.</p>
+<p>Want to be notified about new posts? <a href="../../subscribe.html">Subscribe for free</a>.</p>
+
+
+
+ ]]></description>
+  <category>Clinical Research</category>
+  <category>Data Science</category>
+  <category>AI</category>
+  <category>Bioinformatics</category>
+  <category>Research Opportunities</category>
+  <guid>https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/</guid>
+  <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/thumbnail.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>
