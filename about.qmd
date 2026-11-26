@@ -23,7 +23,9 @@ about:
 I am a highly motivated biomedical researcher with established expertise in
 data analysis and visualization. I am proficient in Unix-based environments,
 R, Python and C++, with experience in version control and in building
-reproducible, automated workflows.
+reproducible, automated workflows. I also have hands-on experience applying
+machine learning and deep learning in real-world projects, from model
+development through to deployment (MLOps).
 
 ## What I share here
 
@@ -44,6 +46,7 @@ I also post **Research Opportunities**: open projects you can join as a collabor
 | Environment | Unix / Linux, command line |
 | Workflow | Snakemake, Nextflow, Git & GitHub, reproducible and automated pipelines |
 | Containers | Docker |
+| Machine learning | Machine learning & deep learning in real-world projects, model deployment (MLOps) |
 | Analysis | Statistics, meta-analysis, data visualization |
 
 ## Publications
