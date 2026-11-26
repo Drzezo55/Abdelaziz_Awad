@@ -12,6 +12,37 @@
 <generator>quarto-1.8.25</generator>
 <lastBuildDate>Thu, 26 Nov 2026 00:00:00 GMT</lastBuildDate>
 <item>
+  <title>Welcome to my website</title>
+  <dc:creator>Abdelaziz Awad</dc:creator>
+  <link>https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Welcome! Posts here are organised into four topics:</p>
+<ul>
+<li><strong>Clinical Research</strong> — research methods, systematic reviews and meta-analysis, and how-to guides</li>
+<li><strong>Data Science</strong> — statistics and tutorials in R and Python</li>
+<li><strong>AI</strong> — artificial intelligence in medicine and research, and tools worth knowing</li>
+<li><strong>Bioinformatics</strong> — analysing biological and omics data</li>
+</ul>
+<p>I also post <strong>Research Opportunities</strong>: open research projects you can join. Find them under <em>Posts → Research Opportunities</em>.</p>
+<p>Want to be notified about new posts? <a href="../../subscribe.html">Subscribe for free</a>.</p>
+
+
+
+ ]]></description>
+  <category>Clinical Research</category>
+  <category>Data Science</category>
+  <category>AI</category>
+  <category>Bioinformatics</category>
+  <category>Research Opportunities</category>
+  <guid>https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/</guid>
+  <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/thumbnail.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
   <title>Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA</title>
   <dc:creator>Abdelaziz Awad</dc:creator>
   <link>https://drzezo55.github.io/Abdelaziz_Awad/posts/meta-analysis-in-r/</link>
@@ -705,37 +736,6 @@ font-style: inherit;">"RTSA"</span>))</span></code></pre></div></div>
   <guid>https://drzezo55.github.io/Abdelaziz_Awad/posts/meta-analysis-in-r/</guid>
   <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate>
   <media:content url="https://drzezo55.github.io/Abdelaziz_Awad/posts/meta-analysis-in-r/forest.png" medium="image" type="image/png" height="103" width="144"/>
-</item>
-<item>
-  <title>Welcome to my website</title>
-  <dc:creator>Abdelaziz Awad</dc:creator>
-  <link>https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>Welcome! Posts here are organised into four topics:</p>
-<ul>
-<li><strong>Clinical Research</strong> — research methods, systematic reviews and meta-analysis, and how-to guides</li>
-<li><strong>Data Science</strong> — statistics and tutorials in R and Python</li>
-<li><strong>AI</strong> — artificial intelligence in medicine and research, and tools worth knowing</li>
-<li><strong>Bioinformatics</strong> — analysing biological and omics data</li>
-</ul>
-<p>I also post <strong>Research Opportunities</strong>: open research projects you can join. Find them under <em>Posts → Research Opportunities</em>.</p>
-<p>Want to be notified about new posts? <a href="../../subscribe.html">Subscribe for free</a>.</p>
-
-
-
- ]]></description>
-  <category>Clinical Research</category>
-  <category>Data Science</category>
-  <category>AI</category>
-  <category>Bioinformatics</category>
-  <category>Research Opportunities</category>
-  <guid>https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/</guid>
-  <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate>
-  <media:content url="https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/thumbnail.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>
