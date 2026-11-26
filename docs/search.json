@@ -32,14 +32,21 @@
     "href": "about.html",
     "title": "Abdelaziz Awad",
     "section": "",
-    "text": "Hi! I’m Abdelaziz. I share educational content, open research project opportunities, and posts about data science and statistics."
+    "text": "I am a highly motivated biomedical researcher with established expertise in data analysis and visualization. I am proficient in Unix-based environments, R, Python and C++, with experience in version control and in building reproducible, automated workflows.\nI have co-authored more than 60 publications, most of them systematic reviews and meta-analyses, and I enjoy turning complex data into clear evidence."
   },
   {
-    "objectID": "about.html#interests",
-    "href": "about.html#interests",
+    "objectID": "about.html#what-i-share-here",
+    "href": "about.html#what-i-share-here",
     "title": "Abdelaziz Awad",
-    "section": "Interests",
-    "text": "Interests\n\nClinical research & evidence synthesis\nStatistics and data science (R, Python)\nTeaching research skills"
+    "section": "What I share here",
+    "text": "What I share here\nThis site is where I share science and write practical, step-by-step tutorials on:\n\nClinical Research: study design, systematic reviews and meta-analysis, and evidence synthesis\nData Science: statistics, data analysis and visualization in R and Python\nBioinformatics: working with biological and omics data, pipelines and reproducible analysis\nAI: machine learning and artificial intelligence in medicine and research\n\nI also post Research Opportunities: open projects you can join as a collaborator."
+  },
+  {
+    "objectID": "about.html#skills",
+    "href": "about.html#skills",
+    "title": "Abdelaziz Awad",
+    "section": "Skills",
+    "text": "Skills\n\n\n\nArea\nTools\n\n\n\n\nProgramming\nR, Python, C++\n\n\nEnvironment\nUnix / Linux, command line\n\n\nWorkflow\nGit & GitHub, reproducible and automated pipelines\n\n\nAnalysis\nStatistics, meta-analysis, data visualization"
   },
   {
     "objectID": "about.html#publications",
@@ -53,7 +60,7 @@
     "href": "about.html#get-in-touch",
     "title": "Abdelaziz Awad",
     "section": "Get in touch",
-    "text": "Get in touch\nInterested in collaborating on a research project? See the Research Opportunities posts."
+    "text": "Get in touch\nWant to collaborate, or have an idea for a tutorial? Email me or connect on LinkedIn. Open projects are listed under Research Opportunities."
   },
   {
     "objectID": "posts/welcome/index.html",

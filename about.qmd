@@ -1,9 +1,10 @@
 ---
 title: "Abdelaziz Awad"
+subtitle: "Biomedical researcher · Data science · Bioinformatics · AI · Clinical research"
 image: profile.jpg
 toc: false
 about:
-  template: jolla
+  template: trestles
   links:
     - icon: linkedin
       text: LinkedIn
@@ -19,15 +20,33 @@ about:
       href: mailto:awad.abdelaziz.0505@gmail.com
 ---
 
+I am a highly motivated biomedical researcher with established expertise in
+data analysis and visualization. I am proficient in Unix-based environments,
+R, Python and C++, with experience in version control and in building
+reproducible, automated workflows.
 
-Hi! I'm Abdelaziz. I share educational content, open research project opportunities,
-and posts about data science and statistics.
+I have co-authored more than 60 publications, most of them systematic reviews
+and meta-analyses, and I enjoy turning complex data into clear evidence.
 
-## Interests
+## What I share here
 
-- Clinical research & evidence synthesis
-- Statistics and data science (R, Python)
-- Teaching research skills
+This site is where I share science and write practical, step-by-step tutorials on:
+
+- **Clinical Research**: study design, systematic reviews and meta-analysis, and evidence synthesis
+- **Data Science**: statistics, data analysis and visualization in R and Python
+- **Bioinformatics**: working with biological and omics data, pipelines and reproducible analysis
+- **AI**: machine learning and artificial intelligence in medicine and research
+
+I also post **Research Opportunities**: open projects you can join as a collaborator.
+
+## Skills
+
+| Area | Tools |
+|---|---|
+| Programming | R, Python, C++ |
+| Environment | Unix / Linux, command line |
+| Workflow | Git & GitHub, reproducible and automated pipelines |
+| Analysis | Statistics, meta-analysis, data visualization |
 
 ## Publications
 
@@ -36,5 +55,6 @@ See my [Publications](publications.qmd) page or my
 
 ## Get in touch
 
-Interested in collaborating on a research project? See the
-[Research Opportunities](index.qmd#category=Research%20Opportunities) posts.
+Want to collaborate, or have an idea for a tutorial? Email me or connect on
+[LinkedIn](https://www.linkedin.com/in/abdelaziz-a-awad-6976a12aa/). Open projects are listed under
+[Research Opportunities](index.qmd#category=Research%20Opportunities).
