@@ -1,19 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Posts",
-    "section": "",
-    "text": "Welcome to my website\n\n\n\nClinical Research\n\nData Science\n\nAI\n\nBioinformatics\n\nResearch Opportunities\n\n\n\nWhat this site covers: clinical research, data science, AI, bioinformatics, and open research projects you can join.\n\n\n\n\n\nNov 26, 2026\n\n\nAbdelaziz Awad\n\n\n\n\n\n\n\n\n\n\n\n\nInteractive meta-analysis in R: pooling, subgroups, publication bias and TSA\n\n\n\nClinical Research\n\nData Science\n\n\n\nA hands-on tutorial you can run in your browser: random-effects meta-analysis, subgroup analysis, meta-regression, publication bias and trial sequential analysis with metafor and RTSA.\n\n\n\n\n\nNov 26, 2026\n\n\nAbdelaziz Awad\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome to my website",
-    "section": "",
-    "text": "Welcome! Posts here are organised into four topics:\n\nClinical Research — research methods, systematic reviews and meta-analysis, and how-to guides\nData Science — statistics and tutorials in R and Python\nAI — artificial intelligence in medicine and research, and tools worth knowing\nBioinformatics — analysing biological and omics data\n\nI also post Research Opportunities: open research projects you can join. Find them under Posts → Research Opportunities.\nWant to be notified about new posts? Subscribe for free."
-  },
-  {
     "objectID": "subscribe.html",
     "href": "subscribe.html",
     "title": "Subscribe",
@@ -81,63 +67,98 @@
     "href": "posts/meta-analysis-in-r/index.html",
     "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
     "section": "",
-    "text": "This tutorial walks through a complete meta-analysis in R, from pooling the studies to checking whether the evidence is actually conclusive. Every code box is live: press Run Code to execute it in your browser, then edit the code and run it again. Nothing needs to be installed."
+    "text": "This tutorial walks through a complete meta-analysis in R, from pooling the studies to checking whether the evidence is actually conclusive. It covers the two data formats you will meet most often when extracting data from trials:\nEvery code box is live: press Run Code to execute it in your browser, then edit the code and run it again. Nothing needs to be installed."
   },
   {
-    "objectID": "posts/meta-analysis-in-r/index.html#the-example-data",
-    "href": "posts/meta-analysis-in-r/index.html#the-example-data",
+    "objectID": "posts/meta-analysis-in-r/index.html#a1.-enter-the-data",
+    "href": "posts/meta-analysis-in-r/index.html#a1.-enter-the-data",
     "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
-    "section": "The example data",
-    "text": "The example data\nWe use a classic dataset that ships with metafor: 13 trials of the BCG vaccine for preventing tuberculosis (dat.bcg). For each trial we have the number of TB cases and non-cases in the vaccinated (tpos, tneg) and control (cpos, cneg) groups, plus two study characteristics we’ll use later: how participants were allocated (alloc) and the absolute latitude of the study site (ablat).\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "section": "A1. Enter the data",
+    "text": "A1. Enter the data\nFor each trial, extract the number of events and the total number of participants in the experimental group (event.e, n.e) and the control group (event.c, n.c). This example uses 13 trials of the BCG vaccine for preventing tuberculosis. We also record two study characteristics to use later: how participants were allocated (alloc) and the absolute latitude of the study site (ablat).\n\n\n\n\n\n\nTipUse your own data\n\n\n\nReplace the numbers below with your own studies, keeping the same column names. In RStudio you can also read them from a spreadsheet: bin &lt;- read.csv(\"my_data.csv\").\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
-    "objectID": "posts/meta-analysis-in-r/index.html#calculate-effect-sizes",
-    "href": "posts/meta-analysis-in-r/index.html#calculate-effect-sizes",
+    "objectID": "posts/meta-analysis-in-r/index.html#a2.-calculate-effect-sizes",
+    "href": "posts/meta-analysis-in-r/index.html#a2.-calculate-effect-sizes",
     "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
-    "section": "1. Calculate effect sizes",
-    "text": "1. Calculate effect sizes\nescalc() computes an effect size and its sampling variance for each study. We use the log risk ratio (measure = \"RR\"). Meta-analysis of ratios is done on the log scale and converted back at the end.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nyi is the log risk ratio and vi its variance. A negative yi means fewer TB cases in the vaccinated group."
+    "section": "A2. Calculate effect sizes",
+    "text": "A2. Calculate effect sizes\nescalc() computes an effect size and its sampling variance for each study. With events and totals, give it ai/n1i (experimental) and ci/n2i (control). We use the log risk ratio (measure = \"RR\"). Ratios are pooled on the log scale and converted back at the end. Use measure = \"OR\" for odds ratios or \"RD\" for risk differences.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nyi is the log risk ratio and vi its variance. A negative yi means fewer TB cases in the vaccinated group."
   },
   {
-    "objectID": "posts/meta-analysis-in-r/index.html#random-effects-meta-analysis",
-    "href": "posts/meta-analysis-in-r/index.html#random-effects-meta-analysis",
+    "objectID": "posts/meta-analysis-in-r/index.html#a3.-random-effects-meta-analysis",
+    "href": "posts/meta-analysis-in-r/index.html#a3.-random-effects-meta-analysis",
     "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
-    "section": "2. Random-effects meta-analysis",
-    "text": "2. Random-effects meta-analysis\nTrials differ in populations and settings, so we assume the true effect varies between studies and fit a random-effects model (REML estimator, the metafor default).\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nConvert the pooled estimate back to a risk ratio, with its 95% CI and prediction interval:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nHow to read it:\n\nPooled RR ≈ 0.49 (95% CI 0.34 to 0.70): on average, vaccination roughly halves the risk of TB.\nI² ≈ 92% and Q-test p &lt; 0.0001: heterogeneity is very high. The trials disagree a lot more than chance would explain.\n95% prediction interval ≈ 0.15 to 1.55: a new trial could find anything from a large benefit to no benefit. With this much heterogeneity, the prediction interval matters as much as the pooled estimate.\n\n\nForest plot\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "section": "A3. Random-effects meta-analysis",
+    "text": "A3. Random-effects meta-analysis\nTrials differ in populations and settings, so we assume the true effect varies between studies and fit a random-effects model (REML estimator, the metafor default).\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nConvert the pooled estimate back to a risk ratio, with its 95% CI and prediction interval:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nHow to read it:\n\nPooled RR ≈ 0.49 (95% CI 0.34 to 0.70): on average, vaccination roughly halves the risk of TB.\nI² ≈ 92% and Q-test p &lt; 0.0001: heterogeneity is very high. The trials disagree a lot more than chance would explain.\n95% prediction interval ≈ 0.15 to 1.55: a new trial could find anything from a large benefit to no benefit. With this much heterogeneity, the prediction interval matters as much as the pooled estimate.\n\n\nForest plot\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
-    "objectID": "posts/meta-analysis-in-r/index.html#subgroup-analysis",
-    "href": "posts/meta-analysis-in-r/index.html#subgroup-analysis",
+    "objectID": "posts/meta-analysis-in-r/index.html#a4.-subgroup-analysis",
+    "href": "posts/meta-analysis-in-r/index.html#a4.-subgroup-analysis",
     "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
-    "section": "3. Subgroup analysis",
-    "text": "3. Subgroup analysis\nDoes the effect differ by allocation method (random, alternate, systematic)? First, pool the studies within each subgroup separately:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nThen test whether the subgroups differ from each other. Adding alloc as a moderator gives the test for subgroup differences (the QM statistic):\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nThe test of moderators gives QM ≈ 1.77, df = 2, p ≈ 0.41: no evidence that the effect differs by allocation method. The subgroup estimates look different, but the differences are compatible with chance.\n\n\n\n\n\n\nTipGood practice for subgroups\n\n\n\nPre-specify subgroups in your protocol, keep them few, and judge them by the test for subgroup differences, not by whether one subgroup is “significant” and another isn’t.\n\n\n\nMeta-regression: a continuous moderator\nSubgroups split studies into categories. For a continuous characteristic such as latitude, use meta-regression:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nLatitude is strongly associated with the effect (p &lt; 0.0001) and explains about 76% of the heterogeneity (R²). The vaccine works better further from the equator."
+    "section": "A4. Subgroup analysis",
+    "text": "A4. Subgroup analysis\nDoes the effect differ by allocation method (random, alternate, systematic)? First, pool the studies within each subgroup separately:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nThen test whether the subgroups differ from each other. Adding alloc as a moderator gives the test for subgroup differences (the QM statistic):\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nThe test of moderators gives QM ≈ 1.77, df = 2, p ≈ 0.41: no evidence that the effect differs by allocation method. The subgroup estimates look different, but the differences are compatible with chance.\n\n\n\n\n\n\nTipGood practice for subgroups\n\n\n\nPre-specify subgroups in your protocol, keep them few, and judge them by the test for subgroup differences, not by whether one subgroup is “significant” and another isn’t.\n\n\n\nMeta-regression: a continuous moderator\nSubgroups split studies into categories. For a continuous characteristic such as latitude, use meta-regression:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nLatitude is strongly associated with the effect (p &lt; 0.0001) and explains about 76% of the heterogeneity (R²). The vaccine works better further from the equator."
   },
   {
-    "objectID": "posts/meta-analysis-in-r/index.html#publication-bias",
-    "href": "posts/meta-analysis-in-r/index.html#publication-bias",
+    "objectID": "posts/meta-analysis-in-r/index.html#a5.-publication-bias",
+    "href": "posts/meta-analysis-in-r/index.html#a5.-publication-bias",
     "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
-    "section": "4. Publication bias",
-    "text": "4. Publication bias\nSmall studies with “negative” results are less likely to be published, which can make the pooled effect look too good. Start with a funnel plot: without bias, the studies should scatter symmetrically around the pooled estimate.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nThen use formal tests:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nNeither test suggests asymmetry (Egger p ≈ 0.42, Begg p ≈ 0.95).\nTrim-and-fill estimates how many studies might be “missing” and adds them to see how the result would change:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nOne study is imputed, and the adjusted RR (≈ 0.52) barely moves, so the conclusion holds.\n\n\n\n\n\n\nWarningInterpret with care\n\n\n\nThese tests have low power with fewer than about 10 studies, and funnel asymmetry can come from heterogeneity, not just publication bias. Here, heterogeneity is very high, so treat all of these results as rough checks."
+    "section": "A5. Publication bias",
+    "text": "A5. Publication bias\nSmall studies with “negative” results are less likely to be published, which can make the pooled effect look too good. Start with a funnel plot: without bias, the studies should scatter symmetrically around the pooled estimate.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nThen use formal tests:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nNeither test suggests asymmetry (Egger p ≈ 0.42, Begg p ≈ 0.95).\nTrim-and-fill estimates how many studies might be “missing” and adds them to see how the result would change:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nOne study is imputed, and the adjusted RR (≈ 0.52) barely moves, so the conclusion holds.\n\n\n\n\n\n\nWarningInterpret with care\n\n\n\nThese tests have low power with fewer than about 10 studies, and funnel asymmetry can come from heterogeneity, not just publication bias. Here, heterogeneity is very high, so treat all of these results as rough checks."
   },
   {
-    "objectID": "posts/meta-analysis-in-r/index.html#trial-sequential-analysis-tsa",
-    "href": "posts/meta-analysis-in-r/index.html#trial-sequential-analysis-tsa",
+    "objectID": "posts/meta-analysis-in-r/index.html#a6.-trial-sequential-analysis-tsa",
+    "href": "posts/meta-analysis-in-r/index.html#a6.-trial-sequential-analysis-tsa",
     "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
-    "section": "5. Trial sequential analysis (TSA)",
-    "text": "5. Trial sequential analysis (TSA)\nA conventional meta-analysis can look “significant” just because it was tested repeatedly as trials accumulated, or because there isn’t yet enough information. TSA treats the meta-analysis like a sequential trial. It calculates the required information size (the number of participants needed for a reliable answer) and draws monitoring boundaries that the cumulative Z-curve must cross before you can call the result firm.\nWe use the RTSA package. It needs the event counts and group sizes, with trials in chronological order:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nNow run the TSA. We assume a minimal clinically relevant effect of RR = 0.8 (a 20% relative risk reduction), α = 5% (two-sided) and 80% power, with O’Brien-Fleming alpha-spending boundaries:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nHow to read it:\n\nThe conventional random-effects result is “significant” (naive p ≈ 0.002).\nBut with this much heterogeneity and a low event rate, the required information size is huge: about 3.5 million participants. The trials provide only about 10% of it.\nThe TSA-adjusted 95% CI (≈ 0.01 to 18) is extremely wide, and the Z-curve hasn’t crossed the monitoring boundary.\n\nSo, by TSA standards, this body of evidence is not yet conclusive, even though the ordinary meta-analysis looks clear. This is exactly the situation TSA is designed to flag: an apparently significant result that rests on too little information once heterogeneity is accounted for.\n\n\n\n\n\n\nTipTry it yourself\n\n\n\nChange mc = 0.8 to mc = 0.5 (you’re now only interested in halving the risk) and run the box again. How does the required information size change?\n\n\n\n\n\n\n\n\nNoteLimitation of this example\n\n\n\nTSA is meant to be planned prospectively. Running it after the fact, as here, is a sensitivity analysis, and RTSA warns about this in its output."
+    "section": "A6. Trial sequential analysis (TSA)",
+    "text": "A6. Trial sequential analysis (TSA)\nA conventional meta-analysis can look “significant” just because it was tested repeatedly as trials accumulated, or because there isn’t yet enough information. TSA treats the meta-analysis like a sequential trial. It calculates the required information size (the number of participants needed for a reliable answer) and draws monitoring boundaries that the cumulative Z-curve must cross before you can call the result firm.\nWe use the RTSA package. For binary outcomes it needs the columns eI, nI (intervention events, total) and eC, nC (control events, total), with trials in chronological order:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nNow run the TSA. We assume a minimal clinically relevant effect of RR = 0.8 (a 20% relative risk reduction), α = 5% (two-sided) and 80% power, with O’Brien-Fleming alpha-spending boundaries:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nHow to read it:\n\nThe conventional random-effects result is “significant” (naive p ≈ 0.002).\nBut with this much heterogeneity and a low event rate, the required information size is huge: about 3.5 million participants. The trials provide only about 10% of it.\nThe TSA-adjusted 95% CI (≈ 0.01 to 18) is extremely wide, and the Z-curve hasn’t crossed the monitoring boundary.\n\nSo, by TSA standards, this body of evidence is not yet conclusive, even though the ordinary meta-analysis looks clear. This is exactly the situation TSA is designed to flag: an apparently significant result that rests on too little information once heterogeneity is accounted for.\n\n\n\n\n\n\nTipTry it yourself\n\n\n\nChange mc = 0.8 to mc = 0.5 (you’re now only interested in halving the risk) and run the box again. How does the required information size change?"
   },
   {
-    "objectID": "posts/meta-analysis-in-r/index.html#summary",
-    "href": "posts/meta-analysis-in-r/index.html#summary",
+    "objectID": "posts/meta-analysis-in-r/index.html#b1.-enter-the-data",
+    "href": "posts/meta-analysis-in-r/index.html#b1.-enter-the-data",
     "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
-    "section": "Summary",
-    "text": "Summary\n\n\n\n\n\n\n\n\nStep\nFunction\nResult for the BCG trials\n\n\n\n\nEffect sizes\nescalc()\nLog risk ratios for 13 trials\n\n\nPooled effect\nrma()\nRR 0.49 (0.34 to 0.70), I² ≈ 92%\n\n\nSubgroups\nrma(mods = ~ alloc)\nNo difference by allocation (p ≈ 0.41)\n\n\nMeta-regression\nrma(mods = ~ ablat)\nLatitude explains ≈ 76% of heterogeneity\n\n\nPublication bias\nfunnel(), regtest(), ranktest(), trimfill()\nNo clear asymmetry; adjusted RR ≈ 0.52\n\n\nTSA\nRTSA()\nOnly ≈ 10% of required information; not conclusive"
+    "section": "B1. Enter the data",
+    "text": "B1. Enter the data\nFor continuous outcomes, extract the mean, standard deviation and number of participants in each group: mean.e, sd.e, n.e (experimental) and mean.c, sd.c, n.c (control).\nThis example uses 13 trials of self-management education for adults with asthma (Gibson et al. 2002, from the metadat package). The outcome is the number of days off work or school, so lower is better. The program column records whether the intervention was optimal self-management (written action plan, self-monitoring and regular medical review) or only partial.\n\n\n\n\n\n\nImportantCheck your SDs\n\n\n\nPapers often report the standard error (SE) or a 95% CI instead of the SD. Convert them first: SD = SE × √n, or, for a 95% CI of a mean, SD = √n × (upper − lower) / 3.92. Entering an SE as an SD is one of the most common errors in meta-analysis.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
-    "objectID": "posts/meta-analysis-in-r/index.html#run-it-on-your-own-computer",
-    "href": "posts/meta-analysis-in-r/index.html#run-it-on-your-own-computer",
+    "objectID": "posts/meta-analysis-in-r/index.html#b2.-calculate-effect-sizes-smd-or-md",
+    "href": "posts/meta-analysis-in-r/index.html#b2.-calculate-effect-sizes-smd-or-md",
     "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
-    "section": "Run it on your own computer",
-    "text": "Run it on your own computer\nEverything above also works in regular R or RStudio. Install the packages once:\ninstall.packages(c(\"metafor\", \"RTSA\"))\nThen copy the code from each box, in order.\nFurther reading\n\nViechtbauer W. Conducting meta-analyses in R with the metafor package. Journal of Statistical Software. 2010;36(3):1–48.\nDoing Meta-Analysis in R, a free online book\nCochrane Handbook, chapter 10: Analysing data and undertaking meta-analyses\nRTSA package documentation"
+    "section": "B2. Calculate effect sizes: SMD or MD?",
+    "text": "B2. Calculate effect sizes: SMD or MD?\n\nUse the mean difference (MD) when all studies measure the outcome on the same scale in the same way. It keeps the original units (here, days).\nUse the standardized mean difference (SMD, Hedges’ g) when studies use different scales or instruments, or when the spread differs a lot between studies.\n\nHere, the trials measured days off over very different follow-up periods (look at the means: from under 1 day to over 30), so, like the original review, we use the SMD:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nA negative SMD means fewer days off in the education group. As a rough guide, an SMD of 0.2 is a small effect, 0.5 medium and 0.8 large."
+  },
+  {
+    "objectID": "posts/meta-analysis-in-r/index.html#b3.-random-effects-meta-analysis",
+    "href": "posts/meta-analysis-in-r/index.html#b3.-random-effects-meta-analysis",
+    "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
+    "section": "B3. Random-effects meta-analysis",
+    "text": "B3. Random-effects meta-analysis\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nHow to read it:\n\nPooled SMD ≈ −0.19 (95% CI −0.34 to −0.05), p ≈ 0.01: self-management education slightly reduces days off work or school. This is a small effect.\nI² ≈ 54%, Q-test p ≈ 0.008: moderate heterogeneity.\n95% prediction interval ≈ −0.60 to 0.21: in a new setting, the effect could range from a moderate benefit to none."
+  },
+  {
+    "objectID": "posts/meta-analysis-in-r/index.html#b4.-subgroup-analysis",
+    "href": "posts/meta-analysis-in-r/index.html#b4.-subgroup-analysis",
+    "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
+    "section": "B4. Subgroup analysis",
+    "text": "B4. Subgroup analysis\nIs optimal self-management more effective than partial programs?\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nThe optimal programs show a small benefit (SMD ≈ −0.27, 95% CI −0.43 to −0.11), while the partial programs show none (SMD ≈ 0.01). The test for subgroup differences is borderline (QM ≈ 3.57, p ≈ 0.06), and the partial subgroup has only 4 trials, so this is a hypothesis to test in future trials, not a firm conclusion."
+  },
+  {
+    "objectID": "posts/meta-analysis-in-r/index.html#b5.-publication-bias",
+    "href": "posts/meta-analysis-in-r/index.html#b5.-publication-bias",
+    "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
+    "section": "B5. Publication bias",
+    "text": "B5. Publication bias\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nNeither Egger’s test (p ≈ 0.52) nor Begg’s test (p ≈ 0.37) is significant. But look at trim-and-fill:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nTrim-and-fill imputes 4 missing studies on the right (no benefit) side, and the adjusted SMD shrinks to ≈ −0.07 (95% CI −0.24 to 0.10), which is no longer significant. So the small benefit is sensitive to possible small-study effects, even though the formal tests were negative. This is worth reporting as a limitation."
+  },
+  {
+    "objectID": "posts/meta-analysis-in-r/index.html#b6.-trial-sequential-analysis-tsa",
+    "href": "posts/meta-analysis-in-r/index.html#b6.-trial-sequential-analysis-tsa",
+    "title": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA",
+    "section": "B6. Trial sequential analysis (TSA)",
+    "text": "B6. Trial sequential analysis (TSA)\nFor continuous outcomes, RTSA works on the mean difference in the original units (days). It needs mI, sdI, nI (intervention) and mC, sdC, nC (control), in chronological order:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nFor a continuous TSA you need two assumptions: the minimal relevant difference (mc) and the expected SD of the outcome (sd_mc). Here we look for a reduction of 1 day off work, with an SD of 8 days:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nHow to read it:\n\nThe pooled mean difference is ≈ −0.8 days (TSA-adjusted 95% CI −2.08 to 0.48).\nThe trials provide about 51% of the required information size (≈ 1,728 of 3,361 participants).\nThe Z-curve crosses neither the conventional (green) nor the TSA (red) boundary.\n\nSo there isn’t yet enough information to confirm or rule out a 1-day reduction: more trials are needed.\n\n\n\n\n\n\nNoteWhy is the MD here different from a REML model?\n\n\n\nRTSA uses the DerSimonian-Laird (DL) estimator for random effects. Run rma(yi, vi, data = escalc(\"MD\", m1i = mean.e, sd1i = sd.e, n1i = n.e, m2i = mean.c, sd2i = sd.c, n2i = n.c, data = cont), method = \"DL\") and you get the same −0.79 days. With method = \"REML\" you get about −2.5 days, because these trials differ so much in scale. When results depend this much on the estimator, report it as a sensitivity analysis, and it’s another reason the SMD was the better primary measure here.\n\n\n\n\n\n\n\n\nNoteLimitation of these examples\n\n\n\nTSA is meant to be planned prospectively. Running it after the fact, as here, is a sensitivity analysis, and RTSA warns about this in its output."
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome to my website",
+    "section": "",
+    "text": "Welcome! Posts here are organised into four topics:\n\nClinical Research — research methods, systematic reviews and meta-analysis, and how-to guides\nData Science — statistics and tutorials in R and Python\nAI — artificial intelligence in medicine and research, and tools worth knowing\nBioinformatics — analysing biological and omics data\n\nI also post Research Opportunities: open research projects you can join. Find them under Posts → Research Opportunities.\nWant to be notified about new posts? Subscribe for free."
   },
   {
     "objectID": "publications.html",
@@ -166,5 +187,12 @@
     "title": "Publications",
     "section": "2024",
     "text": "2024\n\nAwad, AA., Itumalla, R., Gaidhane, AM., Khatib, MN., Ballal, S., Bansal, P., & … (2024). Association of electronic cigarette use and suicidal behaviors: a systematic review and meta-analysis. BMC psychiatry. 24 (1), 608\nAwad, AA., Khatib, MN., Gaidhane, AM., Ballal, S., Bansal, P., Srivastava, M., & … (2024). Predictors of acute kidney injury in dengue patients: a systematic review and meta-analysis. Virology Journal. 21 (1), 223\nSerag, I., Abdelhady, M., Awad, AA., Wageeh, A., Shaboub, A., Elhalag, RH., & … (2024). Postoperative elevated bed header position versus supine in the management of chronic subdural hematoma: a systematic review and meta-analysis. Acta Neurologica Belgica. 124 (4), 1177-1187\nMarey, MM., Belal, M., Awad, AA., Rabea, EM., Hassan, MA., Abbas, AW., & … (2024). Efficacy and safety of aldafermin in non-alcoholic steatohepatitis: A systematic review and meta-analysis of randomized controlled trials. Clinics and Research in Hepatology and Gastroenterology. 48 (6), 102357\nAwad, AA., Alkorbi, HA., & Serhan, HA. (2024). Charles Kelman: The father of phacoemulsification. Cureus. 16 (6)\nAwad, AA., Aboelkhier, MM., Mohamed, RG., Abbas, AW., Hageen, AW., & … (2024). Efficacy and safety of ontamalimab in treating inflammatory bowel disease: a systematic review and meta-analysis of randomized controlled trials. Current Pharmacology Reports. 10 (6), 467-484\nAwad, AA., Alkorbi, HA., & Serhan, HA. (2024). Allvar Gullstrand: the only ophthalmologist who won the nobel prize. Cureus. 16 (6)\nAlkorbi, HA., Awad, AA., Hassan, AK., Emoush, LA., Anter, AM., Shraim, BA., & … (2024). Ocular complications of facial fillers and botulinum injections: A comprehensive systematic review. Saudi Ophthalmology (SO) Scientific Meeting. 2024 │The Red Sea\nHazem, A., Awad, AA., Sharaf, MS., Mahmoud, MM., Hassan, MA., Mahmoud, N., & … (2024). S1546 Efficacy and Safety of Endoscopic Submucosal Dissection With Traction-Assisted Method in Comparison to Conventional Method: A Systematic Review and Meta-Analysis. The American Journal of Gastroenterology. 119 (10S), S1121-S1122\nAbosheaishaa, H., Awad, AA., Sharaf, MS., Marey, MM., Hassan, MA., Nassar, M., & … (2024). Efficacy and Safety of Endoscopic Submucosal Dissection With Traction-Assisted Method in Comparison to Conventional Method: A Systematic Review and Meta-Analysis. AMERICAN JOURNAL OF GASTROENTEROLOGY. 119 (10 S), S1121-S1122\nAbosheaishaa, H., Awad, AA., Sharaf, MS., Marey, MM., Hassan, MA., Nassar, M., & … (2024). S1546 Efficacy and Safety of Endoscopic Submucosal Dissection With Traction-Assisted Method in Comparison to Conventional Method: A Systematic Review and Meta-Analysis. Official journal of the American College of Gastroenterology| ACG. 119 (10S …"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Posts",
+    "section": "",
+    "text": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA\n\n\n\nClinical Research\n\nData Science\n\n\n\nA hands-on tutorial you can run in your browser, for binary (events/total) and continuous (mean, SD, n) outcomes: random-effects meta-analysis, subgroup analysis, publication bias and trial sequential analysis with metafor and RTSA.\n\n\n\n\n\nNov 26, 2026\n\n\nAbdelaziz Awad\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to my website\n\n\n\nClinical Research\n\nData Science\n\nAI\n\nBioinformatics\n\nResearch Opportunities\n\n\n\nWhat this site covers: clinical research, data science, AI, bioinformatics, and open research projects you can join.\n\n\n\n\n\nNov 26, 2026\n\n\nAbdelaziz Awad\n\n\n\n\n\nNo matching items"
   }
 ]
