@@ -304,7 +304,38 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 
 
-<p>This tutorial walks through a complete meta-analysis in R, from pooling the studies to checking whether the evidence is actually conclusive. <strong>Every code box is live</strong>: press <strong>Run Code</strong> to execute it in your browser, then edit the code and run it again. Nothing needs to be installed.</p>
+<p>This tutorial walks through a complete meta-analysis in R, from pooling the studies to checking whether the evidence is actually conclusive. It covers the two data formats you will meet most often when extracting data from trials:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Outcome type</th>
+<th>What you extract per group</th>
+<th>Effect measure</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Binary</strong> (dichotomous)</td>
+<td>number of <strong>events</strong> and <strong>total</strong> participants</td>
+<td>Risk ratio (RR)</td>
+<td>BCG vaccine and tuberculosis</td>
+</tr>
+<tr class="even">
+<td><strong>Continuous</strong></td>
+<td><strong>mean</strong>, <strong>SD</strong> and <strong>n</strong></td>
+<td>Standardized mean difference (SMD) or mean difference (MD)</td>
+<td>Asthma education and days off work</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Every code box is live</strong>: press <strong>Run Code</strong> to execute it in your browser, then edit the code and run it again. Nothing needs to be installed.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -315,29 +346,46 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The page downloads R and the packages (<code>metafor</code>, <code>RTSA</code>) the first time. Wait until the status bar at the top of the page says it’s ready, then run the boxes <strong>in order</strong>: each box uses objects created by the ones above it.</p>
+<p>The page downloads R and the packages (<code>metafor</code>, <code>RTSA</code>) the first time. Wait until the status at the top of the page says it’s ready, then run the boxes <strong>in order</strong>: each box uses objects created by the ones above it.</p>
 </div>
 </div>
-<section id="the-example-data" class="level2">
-<h2 class="anchored" data-anchor-id="the-example-data">The example data</h2>
-<p>We use a classic dataset that ships with <code>metafor</code>: 13 trials of the <strong>BCG vaccine</strong> for preventing tuberculosis (<code>dat.bcg</code>). For each trial we have the number of TB cases and non-cases in the vaccinated (<code>tpos</code>, <code>tneg</code>) and control (<code>cpos</code>, <code>cneg</code>) groups, plus two study characteristics we’ll use later: how participants were allocated (<code>alloc</code>) and the absolute latitude of the study site (<code>ablat</code>).</p>
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="calculate-effect-sizes" class="level2">
-<h2 class="anchored" data-anchor-id="calculate-effect-sizes">1. Calculate effect sizes</h2>
-<p><code>escalc()</code> computes an effect size and its sampling variance for each study. We use the <strong>log risk ratio</strong> (<code>measure = "RR"</code>). Meta-analysis of ratios is done on the log scale and converted back at the end.</p>
+<section id="part-a-binary-outcomes-events-and-total" class="level1">
+<h1>Part A: Binary outcomes (events and total)</h1>
+<section id="a1.-enter-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="a1.-enter-the-data">A1. Enter the data</h2>
+<p>For each trial, extract the number of <strong>events</strong> and the <strong>total</strong> number of participants in the experimental group (<code>event.e</code>, <code>n.e</code>) and the control group (<code>event.c</code>, <code>n.c</code>). This example uses 13 trials of the <strong>BCG vaccine</strong> for preventing tuberculosis. We also record two study characteristics to use later: how participants were allocated (<code>alloc</code>) and the absolute latitude of the study site (<code>ablat</code>).</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Use your own data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Replace the numbers below with your own studies, keeping the same column names. In RStudio you can also read them from a spreadsheet: <code>bin &lt;- read.csv("my_data.csv")</code>.</p>
+</div>
+</div>
 <div id="qwebr-insertion-location-2"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="a2.-calculate-effect-sizes" class="level2">
+<h2 class="anchored" data-anchor-id="a2.-calculate-effect-sizes">A2. Calculate effect sizes</h2>
+<p><code>escalc()</code> computes an effect size and its sampling variance for each study. With events and totals, give it <code>ai</code>/<code>n1i</code> (experimental) and <code>ci</code>/<code>n2i</code> (control). We use the <strong>log risk ratio</strong> (<code>measure = "RR"</code>). Ratios are pooled on the log scale and converted back at the end. Use <code>measure = "OR"</code> for odds ratios or <code>"RD"</code> for risk differences.</p>
+<div id="qwebr-insertion-location-3"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p><code>yi</code> is the log risk ratio and <code>vi</code> its variance. A negative <code>yi</code> means fewer TB cases in the vaccinated group.</p>
 </section>
-<section id="random-effects-meta-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="random-effects-meta-analysis">2. Random-effects meta-analysis</h2>
+<section id="a3.-random-effects-meta-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="a3.-random-effects-meta-analysis">A3. Random-effects meta-analysis</h2>
 <p>Trials differ in populations and settings, so we assume the true effect varies between studies and fit a <strong>random-effects model</strong> (REML estimator, the <code>metafor</code> default).</p>
-<div id="qwebr-insertion-location-3"></div>
+<div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Convert the pooled estimate back to a risk ratio, with its 95% CI and prediction interval:</p>
-<div id="qwebr-insertion-location-4"></div>
+<div id="qwebr-insertion-location-5"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p><strong>How to read it:</strong></p>
 <ul>
@@ -347,17 +395,17 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </ul>
 <section id="forest-plot" class="level3">
 <h3 class="anchored" data-anchor-id="forest-plot">Forest plot</h3>
-<div id="qwebr-insertion-location-5"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-</section>
-<section id="subgroup-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="subgroup-analysis">3. Subgroup analysis</h2>
-<p>Does the effect differ by <strong>allocation method</strong> (random, alternate, systematic)? First, pool the studies within each subgroup separately:</p>
 <div id="qwebr-insertion-location-6"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Then test whether the subgroups <strong>differ from each other</strong>. Adding <code>alloc</code> as a moderator gives the test for subgroup differences (the <code>QM</code> statistic):</p>
+</section>
+</section>
+<section id="a4.-subgroup-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="a4.-subgroup-analysis">A4. Subgroup analysis</h2>
+<p>Does the effect differ by <strong>allocation method</strong> (random, alternate, systematic)? First, pool the studies within each subgroup separately:</p>
 <div id="qwebr-insertion-location-7"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Then test whether the subgroups <strong>differ from each other</strong>. Adding <code>alloc</code> as a moderator gives the test for subgroup differences (the <code>QM</code> statistic):</p>
+<div id="qwebr-insertion-location-8"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>The test of moderators gives <strong>QM ≈ 1.77, df = 2, p ≈ 0.41</strong>: no evidence that the effect differs by allocation method. The subgroup estimates look different, but the differences are compatible with chance.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -376,22 +424,22 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <section id="meta-regression-a-continuous-moderator" class="level3">
 <h3 class="anchored" data-anchor-id="meta-regression-a-continuous-moderator">Meta-regression: a continuous moderator</h3>
 <p>Subgroups split studies into categories. For a continuous characteristic such as <strong>latitude</strong>, use meta-regression:</p>
-<div id="qwebr-insertion-location-8"></div>
+<div id="qwebr-insertion-location-9"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Latitude is strongly associated with the effect (<strong>p &lt; 0.0001</strong>) and explains about <strong>76% of the heterogeneity</strong> (R²). The vaccine works better further from the equator.</p>
 </section>
 </section>
-<section id="publication-bias" class="level2">
-<h2 class="anchored" data-anchor-id="publication-bias">4. Publication bias</h2>
+<section id="a5.-publication-bias" class="level2">
+<h2 class="anchored" data-anchor-id="a5.-publication-bias">A5. Publication bias</h2>
 <p>Small studies with “negative” results are less likely to be published, which can make the pooled effect look too good. Start with a <strong>funnel plot</strong>: without bias, the studies should scatter symmetrically around the pooled estimate.</p>
-<div id="qwebr-insertion-location-9"></div>
+<div id="qwebr-insertion-location-10"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Then use formal tests:</p>
-<div id="qwebr-insertion-location-10"></div>
+<div id="qwebr-insertion-location-11"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Neither test suggests asymmetry (Egger p ≈ 0.42, Begg p ≈ 0.95).</p>
 <p><strong>Trim-and-fill</strong> estimates how many studies might be “missing” and adds them to see how the result would change:</p>
-<div id="qwebr-insertion-location-11"></div>
+<div id="qwebr-insertion-location-12"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>One study is imputed, and the adjusted RR (≈ 0.52) barely moves, so the conclusion holds.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
@@ -408,16 +456,16 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </section>
-<section id="trial-sequential-analysis-tsa" class="level2">
-<h2 class="anchored" data-anchor-id="trial-sequential-analysis-tsa">5. Trial sequential analysis (TSA)</h2>
+<section id="a6.-trial-sequential-analysis-tsa" class="level2">
+<h2 class="anchored" data-anchor-id="a6.-trial-sequential-analysis-tsa">A6. Trial sequential analysis (TSA)</h2>
 <p>A conventional meta-analysis can look “significant” just because it was tested repeatedly as trials accumulated, or because there isn’t yet enough information. <strong>TSA</strong> treats the meta-analysis like a sequential trial. It calculates the <strong>required information size</strong> (the number of participants needed for a reliable answer) and draws <strong>monitoring boundaries</strong> that the cumulative Z-curve must cross before you can call the result firm.</p>
-<p>We use the <a href="https://cran.r-project.org/package=RTSA"><code>RTSA</code></a> package. It needs the event counts and group sizes, with trials in chronological order:</p>
-<div id="qwebr-insertion-location-12"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Now run the TSA. We assume a minimal clinically relevant effect of <strong>RR = 0.8</strong> (a 20% relative risk reduction), α = 5% (two-sided) and 80% power, with O’Brien-Fleming alpha-spending boundaries:</p>
+<p>We use the <a href="https://cran.r-project.org/package=RTSA"><code>RTSA</code></a> package. For binary outcomes it needs the columns <code>eI</code>, <code>nI</code> (intervention events, total) and <code>eC</code>, <code>nC</code> (control events, total), with trials in <strong>chronological order</strong>:</p>
 <div id="qwebr-insertion-location-13"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Now run the TSA. We assume a minimal clinically relevant effect of <strong>RR = 0.8</strong> (a 20% relative risk reduction), α = 5% (two-sided) and 80% power, with O’Brien-Fleming alpha-spending boundaries:</p>
 <div id="qwebr-insertion-location-14"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div id="qwebr-insertion-location-15"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p><strong>How to read it:</strong></p>
 <ul>
@@ -439,13 +487,105 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>Change <code>mc = 0.8</code> to <code>mc = 0.5</code> (you’re now only interested in halving the risk) and run the box again. How does the required information size change?</p>
 </div>
 </div>
+</section>
+</section>
+<section id="part-b-continuous-outcomes-mean-sd-and-n" class="level1">
+<h1>Part B: Continuous outcomes (mean, SD and n)</h1>
+<section id="b1.-enter-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="b1.-enter-the-data">B1. Enter the data</h2>
+<p>For continuous outcomes, extract the <strong>mean</strong>, <strong>standard deviation</strong> and <strong>number of participants</strong> in each group: <code>mean.e</code>, <code>sd.e</code>, <code>n.e</code> (experimental) and <code>mean.c</code>, <code>sd.c</code>, <code>n.c</code> (control).</p>
+<p>This example uses 13 trials of <strong>self-management education for adults with asthma</strong> (Gibson et al.&nbsp;2002, from the <code>metadat</code> package). The outcome is the number of <strong>days off work or school</strong>, so lower is better. The <code>program</code> column records whether the intervention was <strong>optimal</strong> self-management (written action plan, self-monitoring and regular medical review) or only <strong>partial</strong>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Check your SDs
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Papers often report the <strong>standard error (SE)</strong> or a <strong>95% CI</strong> instead of the SD. Convert them first: SD = SE × √n, or, for a 95% CI of a mean, SD = √n × (upper − lower) / 3.92. Entering an SE as an SD is one of the most common errors in meta-analysis.</p>
+</div>
+</div>
+<div id="qwebr-insertion-location-16"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="b2.-calculate-effect-sizes-smd-or-md" class="level2">
+<h2 class="anchored" data-anchor-id="b2.-calculate-effect-sizes-smd-or-md">B2. Calculate effect sizes: SMD or MD?</h2>
+<ul>
+<li>Use the <strong>mean difference (MD)</strong> when all studies measure the outcome <strong>on the same scale</strong> in the same way. It keeps the original units (here, days).</li>
+<li>Use the <strong>standardized mean difference (SMD, Hedges’ g)</strong> when studies use different scales or instruments, or when the spread differs a lot between studies.</li>
+</ul>
+<p>Here, the trials measured days off over very different follow-up periods (look at the means: from under 1 day to over 30), so, like the original review, we use the <strong>SMD</strong>:</p>
+<div id="qwebr-insertion-location-17"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>A negative SMD means <strong>fewer days off</strong> in the education group. As a rough guide, an SMD of 0.2 is a small effect, 0.5 medium and 0.8 large.</p>
+</section>
+<section id="b3.-random-effects-meta-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="b3.-random-effects-meta-analysis">B3. Random-effects meta-analysis</h2>
+<div id="qwebr-insertion-location-18"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div id="qwebr-insertion-location-19"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p><strong>How to read it:</strong></p>
+<ul>
+<li><strong>Pooled SMD ≈ −0.19 (95% CI −0.34 to −0.05), p ≈ 0.01:</strong> self-management education slightly reduces days off work or school. This is a small effect.</li>
+<li><strong>I² ≈ 54%, Q-test p ≈ 0.008:</strong> moderate heterogeneity.</li>
+<li><strong>95% prediction interval ≈ −0.60 to 0.21:</strong> in a new setting, the effect could range from a moderate benefit to none.</li>
+</ul>
+</section>
+<section id="b4.-subgroup-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="b4.-subgroup-analysis">B4. Subgroup analysis</h2>
+<p>Is <strong>optimal</strong> self-management more effective than <strong>partial</strong> programs?</p>
+<div id="qwebr-insertion-location-20"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>The optimal programs show a small benefit (<strong>SMD ≈ −0.27, 95% CI −0.43 to −0.11</strong>), while the partial programs show none (<strong>SMD ≈ 0.01</strong>). The test for subgroup differences is borderline (<strong>QM ≈ 3.57, p ≈ 0.06</strong>), and the partial subgroup has only 4 trials, so this is a hypothesis to test in future trials, not a firm conclusion.</p>
+</section>
+<section id="b5.-publication-bias" class="level2">
+<h2 class="anchored" data-anchor-id="b5.-publication-bias">B5. Publication bias</h2>
+<div id="qwebr-insertion-location-21"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Neither Egger’s test (p ≈ 0.52) nor Begg’s test (p ≈ 0.37) is significant. But look at trim-and-fill:</p>
+<div id="qwebr-insertion-location-22"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Trim-and-fill imputes <strong>4 missing studies</strong> on the right (no benefit) side, and the adjusted SMD shrinks to <strong>≈ −0.07 (95% CI −0.24 to 0.10)</strong>, which is no longer significant. So the small benefit is <strong>sensitive to possible small-study effects</strong>, even though the formal tests were negative. This is worth reporting as a limitation.</p>
+</section>
+<section id="b6.-trial-sequential-analysis-tsa" class="level2">
+<h2 class="anchored" data-anchor-id="b6.-trial-sequential-analysis-tsa">B6. Trial sequential analysis (TSA)</h2>
+<p>For continuous outcomes, <code>RTSA</code> works on the <strong>mean difference in the original units</strong> (days). It needs <code>mI</code>, <code>sdI</code>, <code>nI</code> (intervention) and <code>mC</code>, <code>sdC</code>, <code>nC</code> (control), in chronological order:</p>
+<div id="qwebr-insertion-location-23"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>For a continuous TSA you need two assumptions: the <strong>minimal relevant difference</strong> (<code>mc</code>) and the expected <strong>SD</strong> of the outcome (<code>sd_mc</code>). Here we look for a reduction of <strong>1 day</strong> off work, with an SD of 8 days:</p>
+<div id="qwebr-insertion-location-24"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p><strong>How to read it:</strong></p>
+<ul>
+<li>The pooled mean difference is <strong>≈ −0.8 days (TSA-adjusted 95% CI −2.08 to 0.48)</strong>.</li>
+<li>The trials provide about <strong>51% of the required information size</strong> (≈ 1,728 of 3,361 participants).</li>
+<li>The Z-curve crosses neither the conventional (green) nor the TSA (red) boundary.</li>
+</ul>
+<p>So there isn’t yet enough information to confirm or rule out a 1-day reduction: more trials are needed.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Limitation of this example
+<span class="screen-reader-only">Note</span>Why is the MD here different from a REML model?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>RTSA</code> uses the DerSimonian-Laird (DL) estimator for random effects. Run <code>rma(yi, vi, data = escalc("MD", m1i = mean.e, sd1i = sd.e, n1i = n.e, m2i = mean.c, sd2i = sd.c, n2i = n.c, data = cont), method = "DL")</code> and you get the same −0.79 days. With <code>method = "REML"</code> you get about −2.5 days, because these trials differ so much in scale. When results depend this much on the estimator, report it as a sensitivity analysis, and it’s another reason the SMD was the better primary measure here.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Limitation of these examples
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -453,57 +593,66 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </section>
-<section id="summary" class="level2">
-<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+</section>
+<section id="summary" class="level1">
+<h1>Summary</h1>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Step</th>
 <th>Function</th>
-<th>Result for the BCG trials</th>
+<th>Binary: BCG trials (RR)</th>
+<th>Continuous: asthma education (SMD)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Effect sizes</td>
-<td><code>escalc()</code></td>
-<td>Log risk ratios for 13 trials</td>
+<td>Data</td>
+<td><code>data.frame()</code></td>
+<td>events and total per group</td>
+<td>mean, SD and n per group</td>
 </tr>
 <tr class="even">
+<td>Effect sizes</td>
+<td><code>escalc()</code></td>
+<td><code>measure = "RR"</code></td>
+<td><code>measure = "SMD"</code></td>
+</tr>
+<tr class="odd">
 <td>Pooled effect</td>
 <td><code>rma()</code></td>
 <td>RR 0.49 (0.34 to 0.70), I² ≈ 92%</td>
-</tr>
-<tr class="odd">
-<td>Subgroups</td>
-<td><code>rma(mods = ~ alloc)</code></td>
-<td>No difference by allocation (p ≈ 0.41)</td>
+<td>SMD −0.19 (−0.34 to −0.05), I² ≈ 54%</td>
 </tr>
 <tr class="even">
-<td>Meta-regression</td>
-<td><code>rma(mods = ~ ablat)</code></td>
-<td>Latitude explains ≈ 76% of heterogeneity</td>
+<td>Subgroups</td>
+<td><code>rma(mods = ~ group)</code></td>
+<td>No difference by allocation (p ≈ 0.41)</td>
+<td>Optimal vs partial, borderline (p ≈ 0.06)</td>
 </tr>
 <tr class="odd">
 <td>Publication bias</td>
 <td><code>funnel()</code>, <code>regtest()</code>, <code>ranktest()</code>, <code>trimfill()</code></td>
 <td>No clear asymmetry; adjusted RR ≈ 0.52</td>
+<td>Tests negative, but trim-and-fill removes the effect</td>
 </tr>
 <tr class="even">
 <td>TSA</td>
 <td><code>RTSA()</code></td>
-<td>Only ≈ 10% of required information; not conclusive</td>
+<td>≈ 10% of required information; not conclusive</td>
+<td>≈ 51% of required information; not conclusive</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="run-it-on-your-own-computer" class="level2">
-<h2 class="anchored" data-anchor-id="run-it-on-your-own-computer">Run it on your own computer</h2>
+<section id="run-it-on-your-own-computer" class="level1">
+<h1>Run it on your own computer</h1>
 <p>Everything above also works in regular R or RStudio. Install the packages once:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -514,11 +663,12 @@ background-color: null;
 font-style: inherit;">"metafor"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"RTSA"</span>))</span></code></pre></div></div>
-<p>Then copy the code from each box, in order.</p>
+<p>Then copy the code from each box, in order. To use your own studies, replace the numbers in the <code>bin</code> or <code>cont</code> data frame (or read them from a spreadsheet with <code>read.csv()</code>) and keep the column names.</p>
 <p><strong>Further reading</strong></p>
 <ul>
 <li>Viechtbauer W. Conducting meta-analyses in R with the metafor package. <em>Journal of Statistical Software</em>. 2010;36(3):1–48.</li>
 <li><a href="https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/">Doing Meta-Analysis in R</a>, a free online book</li>
+<li><a href="https://training.cochrane.org/handbook">Cochrane Handbook, chapter 6: Choosing effect measures and computing estimates of effect</a></li>
 <li><a href="https://training.cochrane.org/handbook">Cochrane Handbook, chapter 10: Analysing data and undertaking meta-analyses</a></li>
 <li><a href="https://cran.r-project.org/package=RTSA">RTSA package documentation</a></li>
 </ul>
