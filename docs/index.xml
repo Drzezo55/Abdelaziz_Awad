@@ -9,8 +9,8 @@
 <link>https://drzezo55.github.io/Abdelaziz_Awad/</link>
 <atom:link href="https://drzezo55.github.io/Abdelaziz_Awad/index.xml" rel="self" type="application/rss+xml"/>
 <description>Educational content, research project opportunities, and data science posts.</description>
-<generator>quarto-1.11.9</generator>
-<lastBuildDate>Wed, 25 Nov 2026 22:00:00 GMT</lastBuildDate>
+<generator>quarto-1.8.25</generator>
+<lastBuildDate>Thu, 26 Nov 2026 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Welcome to my website</title>
   <dc:creator>Abdelaziz Awad</dc:creator>
@@ -35,8 +35,8 @@
  ]]></description>
   <category>news</category>
   <guid>https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/</guid>
-  <pubDate>Wed, 25 Nov 2026 22:00:00 GMT</pubDate>
-  <media:content url="https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/thumbnail.jpg" medium="image" type="image/jpeg" height="96" width="144"/>
+  <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/thumbnail.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>

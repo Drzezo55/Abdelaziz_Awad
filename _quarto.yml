@@ -17,6 +17,8 @@ website:
         href: index.qmd
       - text: "Research Opportunities"
         href: opportunities.qmd
+      - text: "Publications"
+        href: publications.qmd
       - text: "Resources"
         href: resources.qmd
       - text: "About"
@@ -26,6 +28,9 @@ website:
         href: subscribe.qmd
       - icon: rss
         href: index.xml
+      - icon: mortarboard-fill   # Google Scholar
+        href: https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID
+        aria-label: Google Scholar
       - icon: linkedin
         href: https://www.linkedin.com/
       - icon: github
