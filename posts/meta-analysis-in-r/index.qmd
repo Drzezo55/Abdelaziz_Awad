@@ -311,8 +311,7 @@ from under 1 day to over 30), so, like the original review, we use the **SMD**:
 
 ```{webr-r}
 dat_c <- escalc(measure = "SMD",            # use "MD" for mean difference
-                m1i = mean.e, sd1i
-= sd.e, n1i = n.e,   # experimental
+                m1i = mean.e, sd1i = sd.e, n1i = n.e,   # experimental
                 m2i = mean.c, sd2i = sd.c, n2i = n.c,   # control
                 data = cont, slab = study)
 dat_c[, c("study", "yi", "vi")]
