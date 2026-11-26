@@ -52,7 +52,7 @@ website:
 format:
   html:
     theme:
-      light: cosmo
+      light: united
       dark: darkly          # adds a light/dark toggle
     css: styles.css
     toc: true
