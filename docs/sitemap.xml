@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://drzezo55.github.io/Abdelaziz_Awad/subscribe.html</loc>
-    <lastmod>2026-11-26T19:11:26.692Z</lastmod>
-  </url>
-  <url>
     <loc>https://drzezo55.github.io/Abdelaziz_Awad/about.html</loc>
-    <lastmod>2026-11-26T19:39:54.168Z</lastmod>
-  </url>
-  <url>
-    <loc>https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/index.html</loc>
-    <lastmod>2026-11-26T19:28:02.605Z</lastmod>
+    <lastmod>2026-11-26T19:45:07.946Z</lastmod>
   </url>
   <url>
     <loc>https://drzezo55.github.io/Abdelaziz_Awad/publications.html</loc>
-    <lastmod>2026-11-26T19:06:00.026Z</lastmod>
+    <lastmod>2026-11-26T19:45:07.954Z</lastmod>
+  </url>
+  <url>
+    <loc>https://drzezo55.github.io/Abdelaziz_Awad/posts/welcome/index.html</loc>
+    <lastmod>2026-11-26T19:45:07.954Z</lastmod>
+  </url>
+  <url>
+    <loc>https://drzezo55.github.io/Abdelaziz_Awad/subscribe.html</loc>
+    <lastmod>2026-11-26T19:45:07.954Z</lastmod>
   </url>
   <url>
     <loc>https://drzezo55.github.io/Abdelaziz_Awad/index.html</loc>
-    <lastmod>2026-11-26T19:28:02.604Z</lastmod>
+    <lastmod>2026-11-26T19:45:07.953Z</lastmod>
   </url>
 </urlset>
