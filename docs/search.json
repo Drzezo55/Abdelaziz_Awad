@@ -1,5 +1,19 @@
 [
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Posts",
+    "section": "",
+    "text": "Welcome to my website\n\n\n\nClinical Research\n\nData Science\n\nAI\n\nBioinformatics\n\nResearch Opportunities\n\n\n\nWhat this site covers: clinical research, data science, AI, bioinformatics, and open research projects you can join.\n\n\n\n\n\nNov 26, 2026\n\n\nAbdelaziz Awad\n\n\n\n\n\n\n\n\n\n\n\n\nInteractive meta-analysis in R: pooling, subgroups, publication bias and TSA\n\n\n\nClinical Research\n\nData Science\n\n\n\nA hands-on tutorial you can run in your browser, for binary (events/total) and continuous (mean, SD, n) outcomes: random-effects meta-analysis, subgroup analysis, publication bias and trial sequential analysis with metafor and RTSA.\n\n\n\n\n\nNov 26, 2026\n\n\nAbdelaziz Awad\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome to my website",
+    "section": "",
+    "text": "Welcome! Posts here are organised into four topics:\n\nClinical Research — research methods, systematic reviews and meta-analysis, and how-to guides\nData Science — statistics and tutorials in R and Python\nAI — artificial intelligence in medicine and research, and tools worth knowing\nBioinformatics — analysing biological and omics data\n\nI also post Research Opportunities: open research projects you can join. Find them under Posts → Research Opportunities.\nWant to be notified about new posts? Subscribe for free."
+  },
+  {
     "objectID": "subscribe.html",
     "href": "subscribe.html",
     "title": "Subscribe",
@@ -154,13 +168,6 @@
     "text": "B6. Trial sequential analysis (TSA)\nFor continuous outcomes, RTSA works on the mean difference in the original units (days). It needs mI, sdI, nI (intervention) and mC, sdC, nC (control), in chronological order:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nFor a continuous TSA you need two assumptions: the minimal relevant difference (mc) and the expected SD of the outcome (sd_mc). Here we look for a reduction of 1 day off work, with an SD of 8 days:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nHow to read it:\n\nThe pooled mean difference is ≈ −0.8 days (TSA-adjusted 95% CI −2.08 to 0.48).\nThe trials provide about 51% of the required information size (≈ 1,728 of 3,361 participants).\nThe Z-curve crosses neither the conventional (green) nor the TSA (red) boundary.\n\nSo there isn’t yet enough information to confirm or rule out a 1-day reduction: more trials are needed.\n\n\n\n\n\n\nNoteWhy is the MD here different from a REML model?\n\n\n\nRTSA uses the DerSimonian-Laird (DL) estimator for random effects. Run rma(yi, vi, data = escalc(\"MD\", m1i = mean.e, sd1i = sd.e, n1i = n.e, m2i = mean.c, sd2i = sd.c, n2i = n.c, data = cont), method = \"DL\") and you get the same −0.79 days. With method = \"REML\" you get about −2.5 days, because these trials differ so much in scale. When results depend this much on the estimator, report it as a sensitivity analysis, and it’s another reason the SMD was the better primary measure here.\n\n\n\n\n\n\n\n\nNoteLimitation of these examples\n\n\n\nTSA is meant to be planned prospectively. Running it after the fact, as here, is a sensitivity analysis, and RTSA warns about this in its output."
   },
   {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome to my website",
-    "section": "",
-    "text": "Welcome! Posts here are organised into four topics:\n\nClinical Research — research methods, systematic reviews and meta-analysis, and how-to guides\nData Science — statistics and tutorials in R and Python\nAI — artificial intelligence in medicine and research, and tools worth knowing\nBioinformatics — analysing biological and omics data\n\nI also post Research Opportunities: open research projects you can join. Find them under Posts → Research Opportunities.\nWant to be notified about new posts? Subscribe for free."
-  },
-  {
     "objectID": "publications.html",
     "href": "publications.html",
     "title": "Publications",
@@ -187,12 +194,5 @@
     "title": "Publications",
     "section": "2024",
     "text": "2024\n\nAwad, AA., Itumalla, R., Gaidhane, AM., Khatib, MN., Ballal, S., Bansal, P., & … (2024). Association of electronic cigarette use and suicidal behaviors: a systematic review and meta-analysis. BMC psychiatry. 24 (1), 608\nAwad, AA., Khatib, MN., Gaidhane, AM., Ballal, S., Bansal, P., Srivastava, M., & … (2024). Predictors of acute kidney injury in dengue patients: a systematic review and meta-analysis. Virology Journal. 21 (1), 223\nSerag, I., Abdelhady, M., Awad, AA., Wageeh, A., Shaboub, A., Elhalag, RH., & … (2024). Postoperative elevated bed header position versus supine in the management of chronic subdural hematoma: a systematic review and meta-analysis. Acta Neurologica Belgica. 124 (4), 1177-1187\nMarey, MM., Belal, M., Awad, AA., Rabea, EM., Hassan, MA., Abbas, AW., & … (2024). Efficacy and safety of aldafermin in non-alcoholic steatohepatitis: A systematic review and meta-analysis of randomized controlled trials. Clinics and Research in Hepatology and Gastroenterology. 48 (6), 102357\nAwad, AA., Alkorbi, HA., & Serhan, HA. (2024). Charles Kelman: The father of phacoemulsification. Cureus. 16 (6)\nAwad, AA., Aboelkhier, MM., Mohamed, RG., Abbas, AW., Hageen, AW., & … (2024). Efficacy and safety of ontamalimab in treating inflammatory bowel disease: a systematic review and meta-analysis of randomized controlled trials. Current Pharmacology Reports. 10 (6), 467-484\nAwad, AA., Alkorbi, HA., & Serhan, HA. (2024). Allvar Gullstrand: the only ophthalmologist who won the nobel prize. Cureus. 16 (6)\nAlkorbi, HA., Awad, AA., Hassan, AK., Emoush, LA., Anter, AM., Shraim, BA., & … (2024). Ocular complications of facial fillers and botulinum injections: A comprehensive systematic review. Saudi Ophthalmology (SO) Scientific Meeting. 2024 │The Red Sea\nHazem, A., Awad, AA., Sharaf, MS., Mahmoud, MM., Hassan, MA., Mahmoud, N., & … (2024). S1546 Efficacy and Safety of Endoscopic Submucosal Dissection With Traction-Assisted Method in Comparison to Conventional Method: A Systematic Review and Meta-Analysis. The American Journal of Gastroenterology. 119 (10S), S1121-S1122\nAbosheaishaa, H., Awad, AA., Sharaf, MS., Marey, MM., Hassan, MA., Nassar, M., & … (2024). Efficacy and Safety of Endoscopic Submucosal Dissection With Traction-Assisted Method in Comparison to Conventional Method: A Systematic Review and Meta-Analysis. AMERICAN JOURNAL OF GASTROENTEROLOGY. 119 (10 S), S1121-S1122\nAbosheaishaa, H., Awad, AA., Sharaf, MS., Marey, MM., Hassan, MA., Nassar, M., & … (2024). S1546 Efficacy and Safety of Endoscopic Submucosal Dissection With Traction-Assisted Method in Comparison to Conventional Method: A Systematic Review and Meta-Analysis. Official journal of the American College of Gastroenterology| ACG. 119 (10S …"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Posts",
-    "section": "",
-    "text": "Interactive meta-analysis in R: pooling, subgroups, publication bias and TSA\n\n\n\nClinical Research\n\nData Science\n\n\n\nA hands-on tutorial you can run in your browser, for binary (events/total) and continuous (mean, SD, n) outcomes: random-effects meta-analysis, subgroup analysis, publication bias and trial sequential analysis with metafor and RTSA.\n\n\n\n\n\nNov 26, 2026\n\n\nAbdelaziz Awad\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to my website\n\n\n\nClinical Research\n\nData Science\n\nAI\n\nBioinformatics\n\nResearch Opportunities\n\n\n\nWhat this site covers: clinical research, data science, AI, bioinformatics, and open research projects you can join.\n\n\n\n\n\nNov 26, 2026\n\n\nAbdelaziz Awad\n\n\n\n\n\nNo matching items"
   }
 ]
