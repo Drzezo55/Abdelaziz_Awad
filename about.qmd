@@ -10,7 +10,7 @@ about:
       href: https://www.linkedin.com/
     - icon: mortarboard-fill
       text: Google Scholar
-      href: https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID
+      href: https://scholar.google.com/citations?user=3jWeyoUAAAAJ
     - icon: github
       text: GitHub
       href: https://github.com/Drzezo55
@@ -33,7 +33,7 @@ and posts about data science and statistics.
 ## Publications
 
 See my [Publications](publications.qmd) page or my
-[Google Scholar profile](https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID).
+[Google Scholar profile](https://scholar.google.com/citations?user=3jWeyoUAAAAJ).
 
 ## Get in touch
 
